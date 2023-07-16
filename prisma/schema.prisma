@@ -1,0 +1,102 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Event {
+  id String @id @default(uuid())
+
+  details     EventDetails?
+  invitations Invitation[]
+  wishlist    Wishlist?
+}
+
+model EventDetails {
+  id          String    @id @unique
+  name        String
+  description String?
+  location    String?
+  date        DateTime
+  osaAt       DateTime?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  event   Event         @relation(fields: [id], references: [id])
+  contact EventContact?
+}
+
+model EventContact {
+  id        String    @id @unique
+  name      String
+  email     String?
+  phone     String?
+  message   String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  event EventDetails @relation(fields: [id], references: [id])
+}
+
+model Invitation {
+  code      Int     @id @unique
+  lateEntry Boolean @default(false)
+  eventId   String
+
+  event    Event     @relation(fields: [eventId], references: [id])
+  guests   Guests[]
+  osa      Osa?
+  wishlist Wishlist?
+}
+
+model Guests {
+  name           String
+  invitationCode Int
+  isAdult        Boolean
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  invitation Invitation @relation(fields: [invitationCode], references: [code])
+
+  @@id([invitationCode, name])
+}
+
+model Osa {
+  code      Int     @id @unique
+  attending Boolean
+  adults    Int
+  children  Int
+  notes     String?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  invitation Invitation @relation(fields: [code], references: [code])
+}
+
+model Wishlist {
+  id          String   @id @unique
+  title       String
+  description String?
+  href        String?
+  image       String?
+  price       Decimal?
+
+  claimedBy           Int?        @unique
+  claimedByInvitation Invitation? @relation(fields: [claimedBy], references: [code])
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  event Event @relation(fields: [id], references: [id])
+}
