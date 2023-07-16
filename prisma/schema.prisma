@@ -12,7 +12,7 @@ model Event {
 
   details     EventDetails?
   invitations Invitation[]
-  wishlist    Wishlist?
+  wishlist    Wishlist[]
 }
 
 model EventDetails {
@@ -84,7 +84,7 @@ model Osa {
 }
 
 model Wishlist {
-  id          String   @id @unique
+  id          String   @id @default(uuid())
   title       String
   description String?
   href        String?
@@ -98,5 +98,6 @@ model Wishlist {
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
 
-  event Event @relation(fields: [id], references: [id])
+  eventId String
+  event   Event  @relation(fields: [eventId], references: [id])
 }

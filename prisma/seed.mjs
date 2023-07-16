@@ -92,6 +92,27 @@ async function main() {
             },
           ],
         },
+        wishlist: {
+          create: [
+            {
+              title: "Lego",
+              description: "Lego Technic",
+              href: "https://www.lego.com/sv-se/themes/technic",
+              image: "https://picsum.photos/200/300",
+              claimedBy: 123,
+            },
+            {
+              title: "Böcker",
+              description: "Böcker om programmering",
+              image: "https://picsum.photos/200/300",
+            },
+            {
+              title: "Kläder",
+              description: "Kläder i storlek 86",
+              image: "https://picsum.photos/200/300",
+            },
+          ],
+        },
       },
     });
     console.log("Seeding finished.");
