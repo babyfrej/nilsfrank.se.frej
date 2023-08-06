@@ -1,9 +1,10 @@
-import { prisma } from "@/lib/prisma";
+// import { prisma } from "@/lib/prisma";
 
 export default async function Wishlist() {
-  const x = await prisma.wishlist.findMany({
-    where: { event: { id: process.env.EVENT_ID } },
-  });
+  // const x = await prisma.wishlist.findMany({
+  //   where: { event: { id: process.env.EVENT_ID } },
+  // });
+  const x: any[] = [];
   return (
     <div>
       <h1>Wishlist</h1>
