@@ -1,16 +1,16 @@
+import "../lib/env";
 import clsx from "clsx";
 import "./globals.css";
 import type { Metadata } from "next";
-import { IBM_Plex_Sans, Nothing_You_Could_Do } from "next/font/google";
-import Link from "next/link";
+import { Josefin_Sans, Inter, Montserrat } from "next/font/google";
 
-const ibm_plex = IBM_Plex_Sans({
-  variable: "--font-primary",
-  subsets: ["latin"],
-  weight: ["400"],
-});
-const nothing = Nothing_You_Could_Do({
+const fontSecondary = Montserrat({
   variable: "--font-secondary",
+  subsets: ["latin"],
+  weight: ["800"],
+});
+const fontPrimary = Montserrat({
+  variable: "--font-primary",
   subsets: ["latin"],
   weight: ["400"],
 });
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s - Frej Nils Frank",
   },
   description: "",
-  themeColor: "#f5f5f5",
+  themeColor: "hsl(15, 71%, 79%)",
   icons: {
     icon: "/favicon-16x16.png",
     shortcut: "/favicon-32x32.png",
@@ -32,10 +32,10 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Dop för Frej Nils Frank",
+    title: "Kalas för Frej Nils Frank",
     description: "",
     url: "https://frej.nilsfrank.se",
-    siteName: "Dop för Frej Nils Frank",
+    siteName: "Kalas för Frej Nils Frank",
     images: [
       {
         url: "https://frej.nilsfrank.se/android-chrome-512x512.png",
@@ -55,7 +55,6 @@ export const metadata: Metadata = {
     },
   },
 };
-
 export default function RootLayout({
   children,
 }: {
@@ -63,17 +62,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="sv">
-      <body className={clsx(ibm_plex.variable, nothing.variable)}>
-        <header>
-          <nav>
-            <ul>
-              <li>
-                <Link href="/"></Link>
-              </li>
-            </ul>
-          </nav>
-        </header>
-        <main>{children}</main>
+      <body className={clsx(fontPrimary.variable, fontSecondary.variable)}>
+        {children}
       </body>
     </html>
   );

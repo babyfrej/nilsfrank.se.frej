@@ -8,4 +8,8 @@ const envSchema = z.object({
   EVENT_ID: z.string().default(""),
 });
 
-export const ENV = envSchema.parse(process.env);
+declare global {
+  namespace NodeJS {
+    interface ProcessEnv extends z.infer<typeof envSchema> {}
+  }
+}
