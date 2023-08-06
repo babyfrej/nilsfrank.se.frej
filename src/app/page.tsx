@@ -17,7 +17,7 @@ export default async function Home() {
             style={{ backgroundColor: "var(--bg-body)" }}
           >
             <h1>
-              Välkomna till <span className="magic-effect">Frej's</span>{" "}
+              Välkomna till <span className="magic-effect">Frej&apos;s</span>{" "}
               Födelse&shy;dags&shy;kalas
             </h1>
             <p>
