@@ -11,6 +11,7 @@ export default function Page() {
           src="/hot_air_balloon.png"
           alt="illustration of a hot air balloon"
           fill
+          sizes="(max-width: 668px) 100vh, 668px"
           priority
         />
       </div>

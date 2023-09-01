@@ -44,6 +44,7 @@ export default async function Page() {
               src="/teddy_present_bg.png"
               alt="illustration of a teddy bear sitting by a present"
               priority
+              sizes="(max-width: 668px) 100vh, 668px"
               fill
             />
           </div>
