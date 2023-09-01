@@ -19,7 +19,7 @@ export default async function Page() {
           src="/teddy_baking.png"
           alt="illustration of a teddy bear baking a birthday cake"
           fill
-          sizes="(max-width: 668px) 100vh, 668px"
+          sizes="(max-width: 668px) 100vw, 668px"
           priority
         />
       </div>
