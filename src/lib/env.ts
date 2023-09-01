@@ -6,6 +6,9 @@ const envSchema = z.object({
     .default("development"),
   DATABASE_URL: z.string(),
   EVENT_ID: z.string().default(""),
+
+  ORIGIN: z.string().url().default("http://localhost:3000"),
+  COOKIE_CODE: z.string(),
 });
 
 declare global {

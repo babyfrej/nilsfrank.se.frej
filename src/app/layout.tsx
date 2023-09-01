@@ -1,18 +1,11 @@
 import "../lib/env";
-import clsx from "clsx";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Josefin_Sans, Inter, Montserrat } from "next/font/google";
+import { Montserrat } from "next/font/google";
 
-const fontSecondary = Montserrat({
-  variable: "--font-secondary",
-  subsets: ["latin"],
-  weight: ["800"],
-});
 const fontPrimary = Montserrat({
-  variable: "--font-primary",
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["400", "800"],
 });
 
 export const metadata: Metadata = {
@@ -62,9 +55,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="sv">
-      <body className={clsx(fontPrimary.variable, fontSecondary.variable)}>
-        {children}
-      </body>
+      <body className={fontPrimary.className}>{children}</body>
     </html>
   );
 }

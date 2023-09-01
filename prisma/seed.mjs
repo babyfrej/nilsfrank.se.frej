@@ -9,86 +9,31 @@ async function main() {
       data: {
         details: {
           create: {
-            name: "Frej Födelsedags fest",
-            description: "Frej fyller 1 år och vi firar med en fest",
-            date: new Date("2023-10-09"),
-            location: "Hemma hos oss",
+            name: "Välkomna till Frej's Födelse­dags­kalas",
+            description: `Vi bjuder in till att fira ett år fyllt av glädje, skratt och kärlek. Frej har spridit så mycket lycka omkring sig under detta första magiska år, och vi kan knappt vänta med att dela den här speciella dagen tillsammans med er alla. Hjälp oss fira framsteg, första leenden, små steg och alla de stora stunderna som gör att vi känner oss så stolta som föräldrar. Så ta en ballong, njut av lite festligt fika och låt oss tillsammans skapa ännu fler värdefulla minnen att bevara för alltid.`,
+            location: "Zenithgatan 52",
             osaAt: new Date("2023-09-17"),
             contact: {
               create: {
                 name: "Niklas",
                 email: "niklas.frank@gmail.com",
-                phone: "0722-133743",
+                phone: "0722133743",
                 message: "Vid frågor kontakta Niklas på telefon",
               },
             },
           },
         },
-        invitations: {
+        slots: {
           create: [
             {
-              code: 123,
-              guests: {
-                create: [
-                  {
-                    name: "Niklas",
-                    isAdult: true,
-                  },
-                  {
-                    name: "Therese",
-                    isAdult: true,
-                  },
-                  {
-                    name: "Frej",
-                    isAdult: false,
-                  },
-                ],
-              },
+              start: new Date("2023-10-14 11:00:00+00"),
+              end: new Date("2023-10-14 15:00:00+00"),
+              seats: 15,
             },
             {
-              code: 26,
-              guests: {
-                create: [
-                  {
-                    name: "Niklas",
-                    isAdult: true,
-                  },
-                ],
-              },
-            },
-            {
-              code: 68,
-              guests: {
-                create: [
-                  {
-                    name: "Niklas",
-                    isAdult: true,
-                  },
-                  {
-                    name: "Therese",
-                    isAdult: true,
-                  },
-                ],
-              },
-            },
-            {
-              code: 241,
-              guests: {
-                create: [
-                  {
-                    name: "Niklas",
-                    isAdult: true,
-                  },
-                  {
-                    name: "Therese",
-                    isAdult: true,
-                  },
-                  {
-                    name: "Frej",
-                    isAdult: false,
-                  },
-                ],
-              },
+              start: new Date("2023-10-15 11:00:00+00"),
+              end: new Date("2023-10-15 15:00:00+00"),
+              seats: 15,
             },
           ],
         },
@@ -99,17 +44,27 @@ async function main() {
               description: "Lego Technic",
               href: "https://www.lego.com/sv-se/themes/technic",
               image: "https://picsum.photos/200/300",
-              claimedBy: 123,
+              price: 1_300,
+              claimType: "PARTIAL",
             },
             {
               title: "Böcker",
               description: "Böcker om programmering",
               image: "https://picsum.photos/200/300",
+              claimType: "MULTIPLE",
             },
             {
               title: "Kläder",
               description: "Kläder i storlek 86",
               image: "https://picsum.photos/200/300",
+              claimType: "MULTIPLE",
+            },
+            {
+              title: "Presentkort på Lindex",
+              description:
+                "Med ett presentkort kan vi köpa lite kläder efter behovet uppstår",
+              image: "https://picsum.photos/200/300",
+              claimType: "MULTIPLE",
             },
           ],
         },

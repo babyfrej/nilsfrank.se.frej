@@ -4,18 +4,21 @@
   "private": true,
   "scripts": {
     "postinstall": "prisma generate",
-    "dev": "next dev --turbo -H 192.168.68.55",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.1",
     "@nksfrank/utils": "^1.0.0",
-    "@prisma/client": "^5.0.0",
+    "@prisma/client": "^5.2.0",
     "clsx": "^1.2.1",
-    "next": "13.4.10",
+    "date-fns": "^2.30.0",
+    "next": "13.4.19",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.45.4",
     "zod": "^3.21.4"
   },
   "devDependencies": {
@@ -28,8 +31,10 @@
     "eslint-plugin-prettier": "^5.0.0",
     "postcss": "8.4.26",
     "prettier": "^3.0.0",
-    "prisma": "^5.0.0",
-    "typescript": "5.1.6"
+    "prisma": "^5.2.0",
+    "typescript": "5.1.6",
+    "vitest": "^0.34.1",
+    "vitest-mock-extended": "^1.2.0"
   },
   "prisma": {
     "seed": "node ./prisma/seed.mjs"

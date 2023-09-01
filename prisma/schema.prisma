@@ -10,9 +10,9 @@ generator client {
 model Event {
   id String @id @default(uuid())
 
-  details     EventDetails?
-  invitations Invitation[]
-  wishlist    Wishlist[]
+  details  EventDetails?
+  wishlist Wishlist[]
+  slots    EventSlot[]
 }
 
 model EventDetails {
@@ -20,7 +20,6 @@ model EventDetails {
   name        String
   description String?
   location    String?
-  date        DateTime
   osaAt       DateTime?
 
   createdAt DateTime  @default(now())
@@ -31,8 +30,19 @@ model EventDetails {
   contact EventContact?
 }
 
+model EventSlot {
+  id    String   @id @default(uuid())
+  start DateTime
+  end   DateTime
+  seats Int
+
+  guests  Guests[]
+  Event   Event?   @relation(fields: [eventId], references: [id])
+  eventId String?
+}
+
 model EventContact {
-  id        String    @id @unique
+  id        String    @id @default(uuid())
   name      String
   email     String?
   phone     String?
@@ -44,33 +54,9 @@ model EventContact {
   event EventDetails @relation(fields: [id], references: [id])
 }
 
-model Invitation {
-  code      Int     @id @unique
-  lateEntry Boolean @default(false)
-  eventId   String
-
-  event    Event     @relation(fields: [eventId], references: [id])
-  guests   Guests[]
-  osa      Osa?
-  wishlist Wishlist?
-}
-
 model Guests {
-  name           String
-  invitationCode Int
-  isAdult        Boolean
-
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  deletedAt DateTime?
-
-  invitation Invitation @relation(fields: [invitationCode], references: [code])
-
-  @@id([invitationCode, name])
-}
-
-model Osa {
-  code      Int     @id @unique
+  email     String  @id @unique
+  name      String
   attending Boolean
   adults    Int
   children  Int
@@ -80,7 +66,8 @@ model Osa {
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
 
-  invitation Invitation @relation(fields: [code], references: [code])
+  reservationId String
+  reservation   EventSlot @relation(fields: [reservationId], references: [id])
 }
 
 model Wishlist {
@@ -91,13 +78,34 @@ model Wishlist {
   image       String?
   price       Decimal?
 
-  claimedBy           Int?        @unique
-  claimedByInvitation Invitation? @relation(fields: [claimedBy], references: [code])
-
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
 
   eventId String
   event   Event  @relation(fields: [eventId], references: [id])
+
+  claimType ClaimType       @default(FULL)
+  claims    WishlistClaim[]
+}
+
+enum ClaimType {
+  NO
+  FULL
+  PARTIAL
+  MULTIPLE
+}
+
+model WishlistClaim {
+  email      String
+  wishlistId String
+  wishlist   Wishlist @relation(fields: [wishlistId], references: [id])
+
+  amount Decimal
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@id([email, wishlistId])
 }

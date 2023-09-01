@@ -1,0 +1,25 @@
+.wishlist {
+  --picture-size: 5rem;
+  list-style: none;
+}
+.wishlist > li:not(:last-child) {
+  margin-bottom: 2rem;
+}
+
+.wishlist.item {
+  display: grid;
+  grid-template-columns: var(--picture-size) 3fr;
+  gap: 1rem;
+}
+
+.wishlist .picture {
+  grid-column: 1;
+  grid-row: 1;
+  
+}
+.wishlist .picture .image {
+  aspect-ratio: 1;
+  height: var(--picture-size);
+  object-fit: cover;
+  border-radius: calc(var(--picture-size) / 2);
+}
