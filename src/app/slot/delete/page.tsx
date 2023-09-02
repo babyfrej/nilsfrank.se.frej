@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import styles from "./page.module.css";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { RedirectTask } from "../components/redirect-task";
+import { RedirectTask } from "@/components/redirect-task";
 
 export default async function Page() {
   const c = cookies().get(process.env.COOKIE_CODE)?.value;

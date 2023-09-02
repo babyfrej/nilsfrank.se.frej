@@ -134,6 +134,10 @@ body {
   overflow-x: hidden;
 }
 
+p + p {
+  margin-block: 1rem;
+}
+
 img,
 picture,
 svg {
@@ -274,19 +278,18 @@ a, a:link, a:visited, a:hover, a:active {
   width: max-content;
   margin-inline: auto;
 }
-main {
-  min-height: 100vh;
+main, .main {
   width: min(100%, var(--content-width));
   margin-inline: auto;
-
-  display: flex;
-  flex-direction: column;
+  border-inline: 1px dashed hsl(var(--bg-body-h) var(--bg-body-s) calc(var(--bg-body-l) - 30%) / 0.5);
+}
+main {
+  min-height: 100vh;
 }
 
 article {
   min-height: inherit;
-  border-inline: 1px dashed;
-  border-color: hsl(var(--bg-body-h) var(--bg-body-s) calc(var(--bg-body-l) - 30%) / 0.5);
+  padding-bottom: 2rem;
 }
 
 section:first-of-type {
@@ -404,4 +407,9 @@ section > * {
   .details > .center {
     grid-column: 1 / -1;
   }
+}
+
+footer {
+  border-block-start: 1px solid color-mix(in lab, var(--bg-body) 86%, hsl(0, 0%, 100%));
+  background-image: linear-gradient(95deg, color-mix(in lab, var(--bg-body) 86%, hsl(0, 0%, 84%)), color-mix(in lab, var(--bg-body) 86%, hsl(0, 0%, 42%)));
 }

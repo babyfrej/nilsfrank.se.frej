@@ -1,7 +1,9 @@
+import Image from "next/image";
 import "../lib/env";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
+import { Giraffe } from "@/components/giraffe";
 
 const fontPrimary = Montserrat({
   subsets: ["latin"],
@@ -55,7 +57,23 @@ export default function RootLayout({
 }) {
   return (
     <html lang="sv">
-      <body className={fontPrimary.className}>{children}</body>
+      <body className={fontPrimary.className}>
+        {children}
+        <footer>
+          <div
+            className="main"
+            style={{
+              height: "300px",
+              padding: "2rem",
+              display: "flex",
+              alignItems: "end",
+              color: "color-mix(in lab, var(--bg-body), white 80%)",
+            }}
+          >
+            <Giraffe />
+          </div>
+        </footer>
+      </body>
     </html>
   );
 }

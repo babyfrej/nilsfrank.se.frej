@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { RedirectTask } from "../components/redirect-task";
+import { RedirectTask } from "@/components/redirect-task";
 import styles from "./page.module.css";
 
 export default function Page() {

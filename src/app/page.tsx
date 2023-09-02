@@ -120,11 +120,42 @@ export default async function Page() {
         <section>
           <h2>Frej&apos;s Önskelista</h2>
           <div>
-            Vi önskar att ni hjälper oss att samla ihop pengar till en
-            förvaringsmöbel till Frej&apos;s leksaker. Detta är något som vi
-            kommer att ha nytta av under många år framöver, och som kommer att
-            göra det enklare för Frej att hålla ordning, också bidra till en mer
-            strukturerad och rolig miljö för honom att växa upp.
+            <p>
+              I år hade vi hoppas att ni vill hjälpa oss med att samla ihop lite
+              pengar. Vi har flera saker som vi behöver införskaffa till Frej.
+            </p>
+            <p>
+              Just nu ligger många av Frejs saker utspridda i hans rum, vilket
+              gör det svårt för oss att låta honom på ett säkert sätt vara där
+              och leka. Vi saknar förvaringsutrymmen för hans saker och planerar
+              att köpa en förvaringsmöbel för alla hans småsaker. Denna möbel
+              kommer att vara till stor nytta under de kommande åren och hjälpa
+              Frej att hålla ordning. Det kommer även att bidra till en mer
+              strukturerad och trivsam miljö för honom att växa upp i.
+            </p>
+            <div
+              style={{
+                position: "relative",
+                width: "80%",
+                marginInline: "auto",
+                aspectRatio: "2 / 1",
+                borderRadius: "32px",
+                overflow: "hidden",
+                borderBlockStart: "1px solid",
+                borderBlockEnd: "none",
+                borderInline: "1px solid",
+                borderColor: "color-mix(in lab, var(--bg-body) 74%, white)",
+                boxShadow: "0 0 12px rgba(0, 0, 0, 0.220)",
+              }}
+            >
+              <Image
+                src="/montisory-shelf.webp"
+                alt="photo of a storage furniture for children"
+                sizes="(max-width: 668px) 100vw, 668px"
+                fill
+                style={{ objectFit: "cover", borderRadius: "inherit" }}
+              />
+            </div>
           </div>
         </section>
       </article>
