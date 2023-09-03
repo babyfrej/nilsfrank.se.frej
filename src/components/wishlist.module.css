@@ -23,3 +23,12 @@
   object-fit: cover;
   border-radius: calc(var(--picture-size) / 2);
 }
+
+.wishlistForm {
+  padding: 1rem;
+  padding-block-end: 0;
+}
+.wishlistForm .actions {
+  display: flex;
+  justify-content: flex-end;
+}

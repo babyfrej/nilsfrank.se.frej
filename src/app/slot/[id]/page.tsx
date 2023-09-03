@@ -1,5 +1,5 @@
 "use server";
-import { SlotForm } from "@/components/modal";
+import { SlotForm } from "@/components/slot-form";
 import prisma from "@/lib/prisma";
 import { cookies } from "next/headers";
 import Image from "next/image";
@@ -10,7 +10,7 @@ export default async function Page({
 }: {
   params: { id: string };
 }) {
-  const email = cookies().get(process.env.COOKIE_CODE)?.value ?? "";
+  const email = cookies().get(process.env.NEXT_PUBLIC_COOKIE_CODE)?.value ?? "";
   const data = await prisma.eventSlot.findFirst({
     where: { id },
     select: {

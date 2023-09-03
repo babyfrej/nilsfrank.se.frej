@@ -8,7 +8,7 @@ const envSchema = z.object({
   EVENT_ID: z.string().default(""),
 
   ORIGIN: z.string().url().default("http://localhost:3000"),
-  COOKIE_CODE: z.string(),
+  NEXT_PUBLIC_COOKIE_CODE: z.string(),
 });
 
 declare global {

@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import styles from "./icons.module.css";
 
 export const Clock = () => (
@@ -37,5 +38,15 @@ export const Event = () => (
     viewBox="0 -960 960 960"
   >
     <path d="M580-240q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z" />
+  </svg>
+);
+
+export const Send = ({ className }: { className?: string }) => (
+  <svg
+    className={clsx(styles.icon, className)}
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 -960 960 960"
+  >
+    <path d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z" />
   </svg>
 );

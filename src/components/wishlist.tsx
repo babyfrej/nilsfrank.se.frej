@@ -1,7 +1,7 @@
-import { Wishlist } from "@prisma/client";
-import styles from "./wishlist.module.css";
-import Image from "next/image";
+import type { Wishlist } from "@prisma/client";
 import clsx from "clsx";
+import Image from "next/image";
+import styles from "./wishlist.module.css";
 
 export type WishlistItem = Pick<
   Wishlist,

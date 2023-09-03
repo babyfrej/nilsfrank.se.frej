@@ -1,7 +1,8 @@
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { z } from "zod";
 
 const slotPost = z.object({
@@ -13,34 +14,41 @@ const slotPost = z.object({
   children: z.coerce.number().int().min(0).default(0),
 });
 
-type SlotValues = z.infer<typeof slotPost>;
 export async function POST(req: NextRequest) {
   const inputs = slotPost.safeParse(await req.json());
   if (!inputs.success) {
-    console.log(inputs.error.errors);
     return NextResponse.json(inputs.error.errors, { status: 400 });
   }
-  await prisma.guests.upsert({
-    create: {
-      attending: true,
-      ...inputs.data,
-    },
-    update: {
-      attending: true,
-      ...inputs.data,
-    },
-    where: {
-      email: inputs.data.email,
-      reservationId: inputs.data.reservationId,
-    },
-  });
+  try {
+    await prisma.guests.upsert({
+      create: {
+        attending: true,
+        ...inputs.data,
+      },
+      update: {
+        attending: true,
+        ...inputs.data,
+      },
+      where: {
+        email: inputs.data.email,
+        reservationId: inputs.data.reservationId,
+      },
+    });
+  } catch (e) {
+    return NextResponse.json(
+      { "root.server": "Något gick fel" },
+      { status: 500 },
+    );
+  }
 
   revalidatePath("/");
-  return NextResponse.json(inputs, {
+  cookies().set(process.env.NEXT_PUBLIC_COOKIE_CODE, inputs.data.email, {
+    expires: new Date("2023-10-15"),
+    sameSite: "strict",
+    path: "/",
+  });
+  return NextResponse.json(null, {
     status: 201,
-    headers: {
-      "Set-Cookie": `${process.env.COOKIE_CODE}=${inputs.data.email}; Path=/; SameSite=Strict; Expires=Fri, 15 Oct 2023 00:00:00 GMT;`,
-    },
   });
 }
 
@@ -48,21 +56,30 @@ const slotDelete = z.object({
   reservationId: z.string().uuid({ message: "Invalid reservationId" }),
 });
 export async function DELETE(req: NextRequest) {
+  const email = req.cookies.get(process.env.NEXT_PUBLIC_COOKIE_CODE)?.value;
+  if (!email) {
+    return NextResponse.json(
+      { "root.server": "Något gick fel" },
+      {
+        status: 500,
+      },
+    );
+  }
   const inputs = slotDelete.safeParse(await req.json());
-  const email = req.cookies.get(process.env.COOKIE_CODE)?.value;
-  if (!email || !inputs.success) {
-    return new Response(null, {
-      status: 400,
-    });
+  if (!inputs.success) {
+    return NextResponse.json(inputs.error.errors, { status: 400 });
   }
   try {
     await prisma.guests.delete({
       where: { email, reservationId: inputs.data.reservationId },
     });
   } catch (e) {
-    return new Response("Något gick fel", {
-      status: 400,
-    });
+    return NextResponse.json(
+      { "root.server": "Något gick fel" },
+      {
+        status: 500,
+      },
+    );
   }
   revalidatePath("/");
   redirect("/");

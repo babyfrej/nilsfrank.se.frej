@@ -108,7 +108,7 @@
   &.md {
     font-size: var(--fs-300);
   }
-  &.l {
+  &.lg {
     font-size: var(--fs-600);
   }
   &.xl {
@@ -134,10 +134,6 @@ body {
   overflow-x: hidden;
 }
 
-p + p {
-  margin-block: 1rem;
-}
-
 img,
 picture,
 svg {
@@ -145,10 +141,22 @@ svg {
   display: block;
 }
 
-* {
+*:not(dialog) {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+dialog {
+  --dlg-bg: var(--clr-tertiary);
+  --dlg-bg-mix: hsl(0, 0%, 100%);
+  color: currentColor;
+  border-radius: 32px;
+  width: min(90vw, 400px);
+  background-color: var(--dlg-bg);
+  border: 1px solid color-mix(in lab, var(--dlg-bg) 60%, var(--dlg-bg-mix));
+  border-block-end: none;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.60), 0 15px 12px rgba(0,0,0,0.22);
 }
 
 input, textarea {
@@ -178,16 +186,20 @@ button, input[type=button], input[type=submit], .button {
   --btn-bg: transparent;
   --btn-bg-hover-mix: white;
   --btn-bg-hover: color-mix(in hsl, var(--btn-bg) 80%, var(--btn-bg-hover-mix));
+  --btn-clr: currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   text-transform: uppercase;
   font-weight: 700;
   padding: 0.5rem 1rem;
   height: 3rem;
   min-width: 8rem;
-  border: 2px solid currentColor;
+  border: 2px solid var(--btn-clr);
   background: var(--btn-bg);
   border-radius: 2rem;
-  color: color-mix(in hsl, currentColor 98%, var(--clr-tertiary));
+  color: var(--btn-clr);
 
   & + & {
     margin-inline-start: 1ch;
@@ -197,10 +209,10 @@ button, input[type=button], input[type=submit], .button {
   }
 }
 button[type=submit], input[type=submit], button.submit, .button.submit {
-  --btn-bg: var(--bg-body);
+  --btn-bg: #2185d0;
   --btn-bg-hover-mix: black;
+  --btn-clr: white;
   border-color: var(--btn-bg);
-  color: var(--clr-body);
   &:hover {
     border-color: var(--btn-bg-hover);
   }
@@ -209,6 +221,7 @@ button[type=reset], button.reset, .button.reset {
   border: none;
   min-width: unset;
 }
+
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
@@ -216,18 +229,20 @@ input[type=number] {
 }
 label {
   display: block;
-  margin-block-end: 1rem;
 }
 label span {
   font-weight: 700;
 }
+label:not(:has(input + span)) {
+  padding-block-end: 29px;
+}
 
 
-h1,
-h2,
-h3,
-h4,
-h5 {
+:is(h1,h2,h3,h4,h5,p,label) {
+  margin-block-end: min(1em, 1rem);
+}
+
+:is(h1,h2,h3,h4,h5) {
   --text: var(--clr-text);
   color: var(--text);
   font-family: var(--font-secondary);
@@ -257,12 +272,6 @@ a, a:link, a:visited, a:hover, a:active {
   font-weight: var(--fw-bold);
   font-family: var(--font-secondary);
   font-size: calc(var(--heading-fs) / 2);
-}
-.wrapper > * {
-  margin-block-end: 1rem;
-}
-.wrapper > h1 {
-  margin-block-end: 2rem;
 }
 
 .details {
@@ -308,43 +317,6 @@ section > * {
   grid-column: 1 / -1;
 }
 
-@keyframes background-pan {
-  from {
-    background-position: 0 center;
-  }
-
-  to {
-    background-position: -200% center;
-  }
-}
-
-.magic-effect {
-  animation: background-pan 3s linear infinite;
-  background: linear-gradient(
-    to right,
-    var(--clr-primary),
-    var(--clr-accent),
-    var(--clr-primary)
-  );
-  background-size: 200%;
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  white-space: nowrap;
-}
-
-.color-effect {
-  background: linear-gradient(
-    120deg,
-    var(--clr-primary),
-    var(--clr-accent)
-  );
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  white-space: nowrap;
-}
-
 .hero {
   row-gap: 0;
 }
@@ -371,8 +343,8 @@ section > * {
 
 .slots {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   justify-items: center;
 }
 
@@ -391,11 +363,9 @@ section > * {
 .slot-time {
   flex: 1;
   display: flex;
+  flex-wrap: nowrap;
   flex-direction: column;
   justify-content: center;
-}
-.slot-action {
-  margin-block: 0.4rem;
 }
 
 .text.info {

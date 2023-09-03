@@ -4,6 +4,10 @@ import Image from "next/image";
 import { format } from "date-fns";
 import Link from "next/link";
 import { Clock, Event, Location, Person } from "@/components/icons";
+import styles from "./page.module.css";
+import clsx from "clsx";
+import { Modal } from "@/components/modal";
+import { WishlistClaimForm } from "@/components/wishlist-claim-form";
 
 export default async function Page() {
   const event = await prisma.event.findFirst({
@@ -35,6 +39,7 @@ export default async function Page() {
       },
     },
   });
+
   return (
     <main>
       <article>
@@ -48,10 +53,7 @@ export default async function Page() {
               fill
             />
           </div>
-          <div
-            className="wrapper"
-            style={{ backgroundColor: "var(--bg-body)" }}
-          >
+          <div style={{ backgroundColor: "var(--bg-body)" }}>
             <h1 className="text align-center">{event?.details?.name}</h1>
             <p>{event?.details?.description}</p>
           </div>
@@ -84,6 +86,7 @@ export default async function Page() {
                         style={{
                           display: "flex",
                           justifyContent: "space-around",
+                          flexWrap: "nowrap",
                         }}
                         className="text"
                       >
@@ -101,7 +104,7 @@ export default async function Page() {
                         </span>
                       </p>
                     </div>
-                    <div className="slot-action text md">Välj tid</div>
+                    <div className="button slot-action text md">Välj tid</div>
                   </Link>
                 ))}
             </div>
@@ -118,8 +121,8 @@ export default async function Page() {
           </div>
         </section>
         <section>
-          <h2>Frej&apos;s Önskelista</h2>
-          <div>
+          <div className={styles.wishlist}>
+            <h2>Frej&apos;s Önskelista</h2>
             <p>
               I år hade vi hoppas att ni vill hjälpa oss med att samla ihop lite
               pengar. Vi har flera saker som vi behöver införskaffa till Frej.
@@ -133,21 +136,7 @@ export default async function Page() {
               Frej att hålla ordning. Det kommer även att bidra till en mer
               strukturerad och trivsam miljö för honom att växa upp i.
             </p>
-            <div
-              style={{
-                position: "relative",
-                width: "80%",
-                marginInline: "auto",
-                aspectRatio: "2 / 1",
-                borderRadius: "32px",
-                overflow: "hidden",
-                borderBlockStart: "1px solid",
-                borderBlockEnd: "none",
-                borderInline: "1px solid",
-                borderColor: "color-mix(in lab, var(--bg-body) 74%, white)",
-                boxShadow: "0 0 12px rgba(0, 0, 0, 0.220)",
-              }}
-            >
+            <div className={clsx(styles.wrapper, styles.imageWrapper)}>
               <Image
                 src="/montisory-shelf.webp"
                 alt="photo of a storage furniture for children"
@@ -155,6 +144,11 @@ export default async function Page() {
                 fill
                 style={{ objectFit: "cover", borderRadius: "inherit" }}
               />
+            </div>
+            <div className={clsx(styles.wrapper, styles.collect)}>
+              <Modal trigger={<button>Va med och samla in</button>}>
+                <WishlistClaimForm item="6e6d1d03-9949-4b25-bdbe-9807e98f6a4a" />
+              </Modal>
             </div>
           </div>
         </section>

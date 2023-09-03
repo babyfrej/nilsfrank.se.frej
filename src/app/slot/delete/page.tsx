@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import { RedirectTask } from "@/components/redirect-task";
 
 export default async function Page() {
-  const c = cookies().get(process.env.COOKIE_CODE)?.value;
+  const c = cookies().get(process.env.NEXT_PUBLIC_COOKIE_CODE)?.value;
 
   if (!c) {
     redirect("/");
