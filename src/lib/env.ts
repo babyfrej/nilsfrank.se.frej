@@ -7,7 +7,6 @@ const envSchema = z.object({
   DATABASE_URL: z.string(),
   EVENT_ID: z.string().default(""),
 
-  ORIGIN: z.string().url().default("http://localhost:3000"),
   NEXT_PUBLIC_COOKIE_CODE: z.string(),
 });
 
