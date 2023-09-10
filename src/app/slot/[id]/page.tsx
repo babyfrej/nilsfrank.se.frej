@@ -22,7 +22,6 @@ export default async function Page({
         where: { email },
         select: {
           name: true,
-          email: true,
           attending: true,
           adults: true,
           children: true,
@@ -61,7 +60,7 @@ export default async function Page({
           />
         </div>
         <section>
-          <SlotForm slot={slot} guest={guest} />
+          <SlotForm slot={slot} guest={{ email, ...guest }} />
         </section>
       </article>
     </main>
