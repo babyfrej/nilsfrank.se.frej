@@ -56,6 +56,7 @@ export default async function Page({
             src="/teddy_party.png"
             alt="illsutration of a teddybear throwing a party"
             fill
+            sizes="(max-width: 668px) 100vw, 668px"
             priority
           />
         </div>
