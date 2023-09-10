@@ -165,7 +165,7 @@ function ClaimRange({ item: { price } }: WishlistClaimsProps) {
   );
 }
 
-export function ClaimHero({ description }) {
+export function ClaimHero() {
   const ariaId = useId();
   const {
     register,

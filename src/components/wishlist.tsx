@@ -53,7 +53,7 @@ export function WishlistHero({ hero }: { hero: WishlistItem }) {
       <div className={styles.collect}>
         <Modal trigger={<button>Va med och samla in</button>}>
           <WishlistClaimForm item={hero}>
-            <ClaimHero description={hero.} />
+            <ClaimHero />
           </WishlistClaimForm>
         </Modal>
       </div>
