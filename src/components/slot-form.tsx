@@ -48,7 +48,6 @@ type FormFields = z.infer<typeof formFields>;
 
 export function SlotForm({ slot, guest }: Props) {
   const router = useRouter();
-  console.log(guest);
   const defaults = guestProps.parse(guest);
   const {
     register,
