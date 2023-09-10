@@ -10,7 +10,7 @@ export default async function Page({
 }: {
   params: { id: string };
 }) {
-  const email = cookies().get(process.env.NEXT_PUBLIC_COOKIE_CODE)?.value ?? "";
+  const email = cookies().get(process.env.NEXT_PUBLIC_COOKIE_CODE)?.value;
   const data = await prisma.eventSlot.findFirst({
     where: { id },
     select: {
@@ -19,7 +19,7 @@ export default async function Page({
       end: true,
       seats: true,
       guests: {
-        where: { email },
+        where: { email: email ?? "" },
         select: {
           name: true,
           attending: true,

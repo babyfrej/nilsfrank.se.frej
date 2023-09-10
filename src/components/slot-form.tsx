@@ -48,6 +48,7 @@ type FormFields = z.infer<typeof formFields>;
 
 export function SlotForm({ slot, guest }: Props) {
   const router = useRouter();
+  console.log(guest);
   const defaults = guestProps.parse(guest);
   const {
     register,
@@ -148,25 +149,3 @@ export function SlotForm({ slot, guest }: Props) {
     </form>
   );
 }
-
-export const Modal = ({ children }: { children: ReactNode }) => {
-  return (
-    <dialog
-      open
-      style={{
-        border: "none",
-        borderInline:
-          "1px solid color-mix(in hsl, var(--clr-tertiary) 70%, white)",
-        boxShadow: "0px 0px 16px 8px rgba(0,0,0,0.5)",
-        padding: "2rem",
-        width: "min(90vw, 400px)",
-        position: "unset",
-        borderRadius: "32px",
-        backgroundColor: "var(--clr-tertiary)",
-        color: "color-mix(in hsl, var(--clr-tertiary) 20%, var(--clr-text))",
-      }}
-    >
-      {children}
-    </dialog>
-  );
-};
