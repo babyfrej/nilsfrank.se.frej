@@ -1,9 +1,9 @@
-import Image from "next/image";
-import "../lib/env";
-import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
+import { Giraffe } from "@/components/giraffe";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
-import { Giraffe } from "@/components/giraffe";
+import "../lib/env";
+import "./globals.css";
 
 const fontPrimary = Montserrat({
   subsets: ["latin"],
@@ -79,6 +79,7 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
+        <Analytics />
       </body>
     </html>
   );
