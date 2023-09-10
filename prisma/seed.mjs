@@ -10,7 +10,10 @@ async function main() {
         details: {
           create: {
             name: "Välkomna till Frej's Födelse­dags­kalas",
-            description: `Vi bjuder in till att fira ett år fyllt av glädje, skratt och kärlek. Frej har spridit så mycket lycka omkring sig under detta första magiska år, och vi kan knappt vänta med att dela den här speciella dagen tillsammans med er alla. Hjälp oss fira framsteg, första leenden, små steg och alla de stora stunderna som gör att vi känner oss så stolta som föräldrar. Så ta en ballong, njut av lite festligt fika och låt oss tillsammans skapa ännu fler värdefulla minnen att bevara för alltid.`,
+            description: `Vi bjuder in till att fira ett år fyllt av glädje, skratt och kärlek. Frej har spridit så mycket lycka omkring sig under detta första magiska år, och vi kan knappt vänta med att dela den här speciella dagen tillsammans med er alla.
+            Hjälp oss fira framsteg, första leenden, små steg och alla de stora stunderna som gör att vi känner oss så stolta som föräldrar.
+            
+            Så ta en ballong, njut av lite festligt fika och låt oss tillsammans skapa ännu fler värdefulla minnen att bevara för alltid.`,
             location: "Zenithgatan 52",
             osaAt: new Date("2023-09-17"),
             contact: {
@@ -40,31 +43,42 @@ async function main() {
         wishlist: {
           create: [
             {
-              title: "Lego",
-              description: "Lego Technic",
-              href: "https://www.lego.com/sv-se/themes/technic",
-              image: "https://picsum.photos/200/300",
-              price: 1_300,
+              title: "Förvaringsmöbel",
+              description: `
+                Just nu ligger många av Frejs saker utspridda i hans rum, vilket gör det svårt för oss att låta honom vara där och leka på ett säkert sätt.
+                Vi saknar bra utrymmen för hans saker och planerar att köpa en förvaringsmöbel för alla hans småsaker.
+
+                Denna möbel kommer att vara till stor nytta under de kommande åren i att hjälpa Frej att hålla ordning i sitt rum.
+                Det kommer även att bidra till en mer strukturerad och trivsam miljö för honom att växa upp i.
+              `,
+              image: "/montisory-shelf.webp",
+              href: "https://lovevery.com/products/the-montessori-playshelf",
               claimType: "PARTIAL",
-            },
-            {
-              title: "Böcker",
-              description: "Böcker om programmering",
-              image: "https://picsum.photos/200/300",
-              claimType: "MULTIPLE",
-            },
-            {
-              title: "Kläder",
-              description: "Kläder i storlek 86",
-              image: "https://picsum.photos/200/300",
-              claimType: "MULTIPLE",
+              price: 4400,
+              hero: true,
             },
             {
               title: "Presentkort på Lindex",
               description:
-                "Med ett presentkort kan vi köpa lite kläder efter behovet uppstår",
-              image: "https://picsum.photos/200/300",
+                "Med ett presentkort kan vi köpa lite kläder allt efter som behovet uppstår",
               claimType: "MULTIPLE",
+            },
+            {
+              title: "Böcker",
+              description: "Fler böcker att läsa för Frej",
+              claimType: "MULTIPLE",
+            },
+            {
+              title: "3 delad Tallrik",
+              description:
+                "En tallrik i trä indelad i tre delar, som är perfekt för att lära sig att äta själv",
+              claimType: "FULL",
+            },
+            {
+              title: "Sparande",
+              description:
+                "Vill du vara med och utöka Frejs sparkonto? Swisha valfritt belopp",
+              claimType: "NO",
             },
           ],
         },

@@ -1,10 +1,13 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useId, useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import styles from "./wishlist.module.css";
+import clsx from "clsx";
 import cookie from "js-cookie";
+import { useId, useState, type ReactNode } from "react";
+import { FormProvider, useForm, useFormContext } from "react-hook-form";
+import { z } from "zod";
+import { ModalClose } from "./modal";
+import styles from "./wishlist.module.css";
+import type { WishlistItem } from "./wishlist";
 
 const formFields = z.object({
   email: z.string().nonempty("Email är obligatoriskt").email("Ogiltig email"),
@@ -12,37 +15,33 @@ const formFields = z.object({
 
 type FormFields = z.infer<typeof formFields>;
 
-type ModalInjectedProps = {
-  onClose: () => void;
-};
 type Props = {
-  item: string;
-} & Partial<ModalInjectedProps>;
+  item: { id: string };
+  children: ReactNode;
+};
 
-export function WishlistClaimForm({ item, onClose }: Props) {
+export function WishlistClaimForm({ item, children }: Props) {
   const [submitted, setSubmitted] = useState(false);
   const email = cookie.get(process.env.NEXT_PUBLIC_COOKIE_CODE);
-  const ariaId = useId();
-  const {
-    register,
-    reset,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<FormFields>({
+  const form = useForm<FormFields>({
     resolver: zodResolver(formFields),
     defaultValues: {
       email,
     },
   });
+  const {
+    reset,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = form;
 
   const handleClose = () => {
     setSubmitted(false);
     reset();
-    onClose?.();
   };
 
   const onSubmit = async (values: FormFields) => {
-    const res = await fetch(`/api/wishlist/${item}/claim`, {
+    const res = await fetch(`/api/wishlist/${item.id}/claim`, {
       method: "POST",
       body: JSON.stringify(values),
     });
@@ -50,46 +49,143 @@ export function WishlistClaimForm({ item, onClose }: Props) {
       setSubmitted(true);
     }
   };
-  if (submitted) {
-    return (
-      <div className={styles.wishlistForm}>
-        <h2>Tack för din anmälan!</h2>
-        <p>Vi återkommer till dig så fort vi kan.</p>
-        <div className={styles.actions}>
-          <button type="reset" onClick={handleClose}>
-            Stäng
-          </button>
-        </div>
-      </div>
-    );
-  }
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className={styles.wishlistForm}>
-        <label htmlFor={`${ariaId}-email`}>
-          <span>Email</span>
-          <input
-            type="email"
-            id={`${ariaId}-email`}
-            {...register("email", {})}
-            aria-invalid={!!errors.email?.message}
-            aria-errormessage={errors.email?.message && `${ariaId}-email-err`}
-          />
-          {errors.email?.message && (
-            <span id={`${ariaId}-email-err`} className="text sm">
-              {errors.email?.message}
-            </span>
+    <FormProvider {...form}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.wishlistForm}>
+          {submitted && (
+            <div className={clsx(styles.success)}>
+              <div className={styles.emoji}>🎉</div>
+              <span>Stort Tack!</span>
+            </div>
           )}
-        </label>
-        <div className={styles.actions}>
-          <button type="reset" onClick={handleClose}>
-            Stäng
-          </button>
-          <button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "Laddar" : "Skicka"}
-          </button>
+          {!submitted && <div className={styles.form}>{children}</div>}
+          <div className={styles.actions}>
+            <ModalClose type="button" onClick={handleClose}>
+              Stäng
+            </ModalClose>
+            {!submitted && (
+              <button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Laddar" : "Skicka"}
+              </button>
+            )}
+          </div>
         </div>
+      </form>
+    </FormProvider>
+  );
+}
+
+type WishlistClaimsProps = {
+  item: WishlistItem;
+};
+
+export function WishlistClaims({
+  item: { claimType },
+  item,
+}: WishlistClaimsProps) {
+  return (
+    <WishlistClaimForm item={item}>
+      {(() => {
+        switch (claimType) {
+          case "FULL":
+            return <ClaimFull item={item} />;
+          case "MULTIPLE":
+            return <ClaimMultiple item={item} />;
+          case "PARTIAL":
+            return <ClaimRange item={item} />;
+        }
+      })()}
+    </WishlistClaimForm>
+  );
+}
+
+function ClaimFull({ item: { id, title } }: WishlistClaimsProps) {
+  const ariaId = useId();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<FormFields>();
+  return (
+    <div>
+      <label htmlFor={`${ariaId}-email`}>
+        <span>Email</span>
+        <input
+          type="email"
+          id={`${ariaId}-email`}
+          {...register("email")}
+          aria-invalid={!!errors.email?.message}
+          aria-errormessage={errors.email?.message && `${ariaId}-email-err`}
+        />
+        {errors.email?.message && (
+          <span id={`${ariaId}-email-err`} className="text sm">
+            {errors.email?.message}
+          </span>
+        )}
+      </label>
+    </div>
+  );
+}
+function ClaimMultiple({ item: { id, title } }: WishlistClaimsProps) {
+  const ariaId = useId();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<FormFields>();
+  return (
+    <div>
+      <h4 className="text align-center">{title}</h4>
+      <label htmlFor={`${ariaId}-email`}>
+        <span>Email</span>
+        <input
+          type="email"
+          id={`${ariaId}-email`}
+          {...register("email")}
+          aria-invalid={!!errors.email?.message}
+          aria-errormessage={errors.email?.message && `${ariaId}-email-err`}
+        />
+        {errors.email?.message && (
+          <span id={`${ariaId}-email-err`} className="text sm">
+            {errors.email?.message}
+          </span>
+        )}
+      </label>
+    </div>
+  );
+}
+
+function ClaimRange({ item: { price } }: WishlistClaimsProps) {
+  return (
+    <div>
+      <div></div>
+      <div>
+        <input type="number" min="0" />
       </div>
-    </form>
+    </div>
+  );
+}
+
+export function ClaimHero({ description }) {
+  const ariaId = useId();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<FormFields>();
+  return (
+    <label htmlFor={`${ariaId}-email`}>
+      <span>Email</span>
+      <input
+        type="email"
+        id={`${ariaId}-email`}
+        {...register("email")}
+        aria-invalid={!!errors.email?.message}
+        aria-errormessage={errors.email?.message && `${ariaId}-email-err`}
+      />
+      {errors.email?.message && (
+        <span id={`${ariaId}-email-err`} className="text sm">
+          {errors.email?.message}
+        </span>
+      )}
+    </label>
   );
 }

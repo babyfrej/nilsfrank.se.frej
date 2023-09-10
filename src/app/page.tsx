@@ -4,42 +4,75 @@ import Image from "next/image";
 import { format } from "date-fns";
 import Link from "next/link";
 import { Clock, Event, Location, Person } from "@/components/icons";
-import styles from "./page.module.css";
-import clsx from "clsx";
-import { Modal } from "@/components/modal";
-import { WishlistClaimForm } from "@/components/wishlist-claim-form";
+import { Wishlist, WishlistHeader, WishlistHero } from "@/components/wishlist";
+import { Markdown } from "@/components/markdown";
 
 export default async function Page() {
-  const event = await prisma.event.findFirst({
-    where: { id: process.env.EVENT_ID },
-    select: {
-      details: {
-        select: {
-          name: true,
-          description: true,
-          location: true,
-          osaAt: true,
-          contact: true,
+  const [event, hero, list] = await prisma.$transaction([
+    prisma.event.findFirst({
+      where: { id: process.env.EVENT_ID },
+      select: {
+        details: {
+          select: {
+            name: true,
+            description: true,
+            location: true,
+            osaAt: true,
+            contact: true,
+          },
         },
-      },
-      slots: {
-        select: {
-          id: true,
-          start: true,
-          end: true,
-          seats: true,
-          guests: {
-            where: { attending: true },
-            select: {
-              adults: true,
-              children: true,
+        slots: {
+          select: {
+            id: true,
+            start: true,
+            end: true,
+            seats: true,
+            guests: {
+              where: { attending: true },
+              select: {
+                adults: true,
+                children: true,
+              },
             },
           },
         },
       },
-    },
-  });
-
+    }),
+    prisma.wishlist.findFirst({
+      where: { eventId: process.env.EVENT_ID, hero: true },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        price: true,
+        image: true,
+        href: true,
+        claimType: true,
+        claims: {
+          select: {
+            email: true,
+          },
+        },
+      },
+    }),
+    prisma.wishlist.findMany({
+      where: { eventId: process.env.EVENT_ID, hero: false },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        price: true,
+        image: true,
+        href: true,
+        claimType: true,
+        claims: {
+          select: {
+            email: true,
+          },
+        },
+      },
+    }),
+  ]);
   return (
     <main>
       <article>
@@ -55,7 +88,9 @@ export default async function Page() {
           </div>
           <div style={{ backgroundColor: "var(--bg-body)" }}>
             <h1 className="text align-center">{event?.details?.name}</h1>
-            <p>{event?.details?.description}</p>
+            {event?.details?.description && (
+              <Markdown content={event?.details?.description} />
+            )}
           </div>
         </section>
         <section className="bg-secondary details">
@@ -121,36 +156,15 @@ export default async function Page() {
           </div>
         </section>
         <section>
-          <div className={styles.wishlist}>
-            <h2>Frej&apos;s Önskelista</h2>
-            <p>
-              I år hade vi hoppas att ni vill hjälpa oss med att samla ihop lite
-              pengar. Vi har flera saker som vi behöver införskaffa till Frej.
-            </p>
-            <p>
-              Just nu ligger många av Frejs saker utspridda i hans rum, vilket
-              gör det svårt för oss att låta honom på ett säkert sätt vara där
-              och leka. Vi saknar förvaringsutrymmen för hans saker och planerar
-              att köpa en förvaringsmöbel för alla hans småsaker. Denna möbel
-              kommer att vara till stor nytta under de kommande åren och hjälpa
-              Frej att hålla ordning. Det kommer även att bidra till en mer
-              strukturerad och trivsam miljö för honom att växa upp i.
-            </p>
-            <div className={clsx(styles.wrapper, styles.imageWrapper)}>
-              <Image
-                src="/montisory-shelf.webp"
-                alt="photo of a storage furniture for children"
-                sizes="(max-width: 668px) 100vw, 668px"
-                fill
-                style={{ objectFit: "cover", borderRadius: "inherit" }}
+          <WishlistHeader>
+            {hero && <WishlistHero hero={hero} />}
+            {Array.isArray(list) && (
+              <Wishlist
+                list={list}
+                description={<p>Annars finns här lite inspirerande idéer</p>}
               />
-            </div>
-            <div className={clsx(styles.wrapper, styles.collect)}>
-              <Modal trigger={<button>Va med och samla in</button>}>
-                <WishlistClaimForm item="6e6d1d03-9949-4b25-bdbe-9807e98f6a4a" />
-              </Modal>
-            </div>
-          </div>
+            )}
+          </WishlistHeader>
         </section>
       </article>
     </main>

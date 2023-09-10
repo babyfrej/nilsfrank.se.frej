@@ -66,11 +66,17 @@ export default function RootLayout({
               height: "300px",
               padding: "2rem",
               display: "flex",
+              gap: "1rem",
               alignItems: "end",
               color: "color-mix(in lab, var(--bg-body), white 80%)",
             }}
           >
             <Giraffe />
+
+            <div className="with-love">
+              <h3>nilsfrank.se</h3>
+              <span>Made with ❤️ by Niklas Frank</span>
+            </div>
           </div>
         </footer>
       </body>
