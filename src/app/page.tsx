@@ -50,6 +50,7 @@ export default async function Page() {
         claimType: true,
         claims: {
           select: {
+            amount: true,
             email: true,
           },
         },
@@ -67,6 +68,7 @@ export default async function Page() {
         claimType: true,
         claims: {
           select: {
+            amount: true,
             email: true,
           },
         },
