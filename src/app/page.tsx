@@ -81,7 +81,7 @@ export default async function Page() {
         <section className="hero">
           <div className="hero-img">
             <Image
-              src="/teddy_present_bg.png"
+              src="/teddy_present_bg.webp"
               alt="illustration of a teddy bear sitting by a present"
               priority
               sizes="(max-width: 668px) 100vw, 668px"

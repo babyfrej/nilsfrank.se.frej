@@ -8,7 +8,7 @@ export default function Page() {
     <div className={styles.main}>
       <div className={styles.header}>
         <Image
-          src="/hot_air_balloon.png"
+          src="/hot_air_balloon.webp"
           alt="illustration of a hot air balloon"
           fill
           sizes="(max-width: 668px) 100vw, 668px"

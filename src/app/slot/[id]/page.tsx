@@ -52,7 +52,7 @@ export default async function Page({
           }}
         >
           <Image
-            src="/teddy_party.png"
+            src="/teddy_party.webp"
             alt="illsutration of a teddybear throwing a party"
             fill
             sizes="(max-width: 668px) 100vw, 668px"

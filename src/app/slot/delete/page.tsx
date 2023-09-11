@@ -16,7 +16,7 @@ export default async function Page() {
     <div className={styles.main}>
       <div className={styles.header}>
         <Image
-          src="/teddy_baking.png"
+          src="/teddy_baking.webp"
           alt="illustration of a teddy bear baking a birthday cake"
           fill
           sizes="(max-width: 668px) 100vw, 668px"
