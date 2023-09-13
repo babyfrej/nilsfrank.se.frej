@@ -37,7 +37,8 @@ export function WishlistHeader({ children }: { children: ReactNode }) {
 
 export function WishlistHero({ hero }: { hero: WishlistItem }) {
   return (
-    <div>
+    <article style={{ paddingBottom: "4rem" }}>
+      <h3 className="text align-center">{hero.title}</h3>
       {hero.image && (
         <div className={styles.imageWrapper}>
           <Image
@@ -57,7 +58,7 @@ export function WishlistHero({ hero }: { hero: WishlistItem }) {
           </WishlistClaimForm>
         </Modal>
       </div>
-    </div>
+    </article>
   );
 }
 

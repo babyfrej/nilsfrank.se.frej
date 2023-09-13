@@ -38,7 +38,7 @@ export default async function Page() {
         },
       },
     }),
-    prisma.wishlist.findFirst({
+    prisma.wishlist.findMany({
       where: { eventId: process.env.EVENT_ID, hero: true },
       select: {
         id: true,
@@ -159,7 +159,8 @@ export default async function Page() {
         </section>
         <section>
           <WishlistHeader>
-            {hero && <WishlistHero hero={hero} />}
+            {Array.isArray(hero) &&
+              hero.map((hero) => <WishlistHero key={hero.id} hero={hero} />)}
             {Array.isArray(list) && (
               <Wishlist
                 list={list}
