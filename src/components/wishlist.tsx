@@ -38,7 +38,7 @@ export function WishlistHeader({ children }: { children: ReactNode }) {
 
 export function WishlistHero({ hero }: { hero: WishlistItem }) {
   let elTitle = <h3 className="text align-center">{hero.title}</h3>;
-  let elImage = hero.image ? <div className={styles.imageWrapper}>
+  let elImage = hero.image && <div className={styles.imageWrapper}>
     <Image
     src={hero.image}
     alt="photo of a storage furniture for children"
@@ -46,10 +46,10 @@ export function WishlistHero({ hero }: { hero: WishlistItem }) {
     fill
     style={{ objectFit: "cover", borderRadius: "inherit" }}
     />
-  </div> : null;
+  </div>;
   if(hero.href) {
     elTitle = <Link href={hero.href}>{elTitle}</Link>
-    elImage = elImage && <Link href={hero.href}>{elImage}</Link>;
+    elImage = hero.image && <Link href={hero.href}>{elImage}</Link>;
   }
   return (
     <article style={{ paddingBottom: "4rem" }}>
