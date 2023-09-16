@@ -10,6 +10,7 @@ import {
   WishlistClaims,
 } from "./wishlist-claim-form";
 import styles from "./wishlist.module.css";
+import Link from "next/link";
 
 export type WishlistItem = Pick<
   Wishlist,
@@ -36,20 +37,24 @@ export function WishlistHeader({ children }: { children: ReactNode }) {
 }
 
 export function WishlistHero({ hero }: { hero: WishlistItem }) {
+  let elTitle = <h3 className="text align-center">{hero.title}</h3>;
+  let elImage = hero.image ? <div className={styles.imageWrapper}>
+    <Image
+    src={hero.image}
+    alt="photo of a storage furniture for children"
+    sizes="(max-width: 668px) 100vw, 668px"
+    fill
+    style={{ objectFit: "cover", borderRadius: "inherit" }}
+    />
+  </div> : null;
+  if(hero.href) {
+    elTitle = <Link href={hero.href}>{elTitle}</Link>
+    elImage = elImage && <Link href={hero.href}>{elImage}</Link>;
+  }
   return (
     <article style={{ paddingBottom: "4rem" }}>
-      <h3 className="text align-center">{hero.title}</h3>
-      {hero.image && (
-        <div className={styles.imageWrapper}>
-          <Image
-            src={hero.image}
-            alt="photo of a storage furniture for children"
-            sizes="(max-width: 668px) 100vw, 668px"
-            fill
-            style={{ objectFit: "cover", borderRadius: "inherit" }}
-          />
-        </div>
-      )}
+      {elTitle}
+      {elImage}
       {hero.description && <Markdown content={hero.description} />}
       <div className={styles.collect}>
         <Modal trigger={<button>Va med och samla in</button>}>
