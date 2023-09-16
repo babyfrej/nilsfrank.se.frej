@@ -106,8 +106,8 @@ function WishlistItem({
     />
   );
   if (href) {
-    elTitle = <a href={href}>{elTitle}</a>;
-    elImage = image && <a href={href}>{elImage}</a>;
+    elTitle = <Link href={href}>{elTitle}</Link>;
+    elImage = image && <Link href={href}>{elImage}</Link>;
   }
   return (
     <div className={clsx(styles.item, { [styles.image]: !!elImage })}>
