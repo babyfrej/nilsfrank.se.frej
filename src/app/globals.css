@@ -99,10 +99,6 @@
     --text: var(--clr-accent);
   }
 
-  &.thin {
-    font-weight: 300;
-  }
-
   &.xs {
     font-size: var(--fs-100);
   }

@@ -7,9 +7,8 @@ import { Wishlist, WishlistHeader, WishlistHero } from "@/components/wishlist";
 import { Markdown } from "@/components/markdown";
 
 export default async function Page() {
-  const db = prisma();
-  const [event, hero, list] = await db.$transaction([
-    db.event.findFirst({
+  const [event, hero, list] = await prisma.$transaction([
+    prisma.event.findFirst({
       where: { id: process.env.EVENT_ID },
       select: {
         details: {
@@ -38,7 +37,7 @@ export default async function Page() {
         },
       },
     }),
-    db.wishlist.findMany({
+    prisma.wishlist.findMany({
       where: { eventId: process.env.EVENT_ID, hero: true },
       select: {
         id: true,
@@ -56,7 +55,7 @@ export default async function Page() {
         },
       },
     }),
-    db.wishlist.findMany({
+    prisma.wishlist.findMany({
       where: { eventId: process.env.EVENT_ID, hero: false },
       select: {
         id: true,
