@@ -103,7 +103,7 @@ export function SlotForm({ slot, guest }: Props) {
             )}
           </label>
           <label htmlFor="name">
-            <span>Name</span>
+            <span>Namn</span>
             <input type="text" {...register("name")} />
           </label>
         </div>
@@ -136,7 +136,7 @@ export function SlotForm({ slot, guest }: Props) {
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           {guest && (
             <button type="button" className="reset" onClick={onDelete}>
-              Tabort
+              Ta bort
             </button>
           )}
           <button type="button" className="reset" onClick={router.back}>

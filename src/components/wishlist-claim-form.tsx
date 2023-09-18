@@ -109,7 +109,7 @@ function ClaimFull({ item: { id, title } }: WishlistClaimsProps) {
   return (
     <div>
       <label htmlFor={`${ariaId}-email`}>
-        <span>Email</span>
+        <span>E-post</span>
         <input
           type="email"
           id={`${ariaId}-email`}
@@ -136,7 +136,7 @@ function ClaimMultiple({ item: { id, title } }: WishlistClaimsProps) {
     <div>
       <h4 className="text align-center">{title}</h4>
       <label htmlFor={`${ariaId}-email`}>
-        <span>Email</span>
+        <span>E-post</span>
         <input
           type="email"
           id={`${ariaId}-email`}
@@ -173,7 +173,7 @@ export function ClaimHero() {
   } = useFormContext<FormFields>();
   return (
     <label htmlFor={`${ariaId}-email`}>
-      <span>Email</span>
+      <span>E-post</span>
       <input
         type="email"
         id={`${ariaId}-email`}
