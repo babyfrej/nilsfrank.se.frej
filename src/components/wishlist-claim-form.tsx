@@ -8,9 +8,13 @@ import { z } from "zod";
 import { ModalClose } from "./modal";
 import styles from "./wishlist.module.css";
 import type { WishlistItem } from "./wishlist";
+import { EmailDisclaimer } from "./email-disclaimer";
 
 const formFields = z.object({
-  email: z.string().nonempty("Email är obligatoriskt").email("Ogiltig email"),
+  email: z
+    .string()
+    .nonempty("E-postadress är obligatorisk")
+    .email("Ogiltig e-postadress"),
 });
 
 type FormFields = z.infer<typeof formFields>;
@@ -110,6 +114,7 @@ function ClaimFull({ item: { id, title } }: WishlistClaimsProps) {
     <div>
       <label htmlFor={`${ariaId}-email`}>
         <span>E-post</span>
+        <EmailDisclaimer />
         <input
           type="email"
           id={`${ariaId}-email`}
@@ -137,6 +142,7 @@ function ClaimMultiple({ item: { id, title } }: WishlistClaimsProps) {
       <h4 className="text align-center">{title}</h4>
       <label htmlFor={`${ariaId}-email`}>
         <span>E-post</span>
+        <EmailDisclaimer />
         <input
           type="email"
           id={`${ariaId}-email`}
@@ -172,20 +178,23 @@ export function ClaimHero() {
     formState: { errors },
   } = useFormContext<FormFields>();
   return (
-    <label htmlFor={`${ariaId}-email`}>
-      <span>E-post</span>
-      <input
-        type="email"
-        id={`${ariaId}-email`}
-        {...register("email")}
-        aria-invalid={!!errors.email?.message}
-        aria-errormessage={errors.email?.message && `${ariaId}-email-err`}
-      />
-      {errors.email?.message && (
-        <span id={`${ariaId}-email-err`} className="text sm">
-          {errors.email?.message}
-        </span>
-      )}
-    </label>
+    <div>
+      <label htmlFor={`${ariaId}-email`}>
+        <span>E-post</span>
+        <EmailDisclaimer />
+        <input
+          type="email"
+          id={`${ariaId}-email`}
+          {...register("email")}
+          aria-invalid={!!errors.email?.message}
+          aria-errormessage={errors.email?.message && `${ariaId}-email-err`}
+        />
+        {errors.email?.message && (
+          <span id={`${ariaId}-email-err`} className="text sm">
+            {errors.email?.message}
+          </span>
+        )}
+      </label>
+    </div>
   );
 }

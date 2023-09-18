@@ -6,7 +6,7 @@ import { z } from "zod";
 const wishlistClaim = z.object({
   email: z
     .string()
-    .nonempty("en e-postadress är obligatorisk")
+    .nonempty("E-postadress är obligatorisk")
     .email("Ogiltig e-postadress"),
 });
 
@@ -20,7 +20,7 @@ export async function POST(
   }
   const inputs = json.data;
   try {
-    await prisma.wishlistClaim.upsert({
+    await prisma().wishlistClaim.upsert({
       where: {
         email_wishlistId: {
           email: inputs.email,
@@ -62,7 +62,7 @@ export async function DELETE(
     return NextResponse.json({ email: "Ingen epost angiven" }, { status: 400 });
   }
   try {
-    await prisma.wishlistClaim.update({
+    await prisma().wishlistClaim.update({
       where: {
         email_wishlistId: {
           email,

@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(inputs.error.errors, { status: 400 });
   }
   try {
-    await prisma.guests.upsert({
+    await prisma().guests.upsert({
       create: {
         attending: true,
         ...inputs.data,
@@ -70,7 +70,7 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json(inputs.error.errors, { status: 400 });
   }
   try {
-    await prisma.guests.delete({
+    await prisma().guests.delete({
       where: { email, reservationId: inputs.data.reservationId },
     });
   } catch (e) {
