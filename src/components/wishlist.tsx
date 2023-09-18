@@ -20,12 +20,12 @@ export type WishlistItem = Pick<
 export function WishlistHeader({ children }: { children: ReactNode }) {
   return (
     <div className={styles.wishlist}>
-      <h2>Frej&apos;s Önskelista</h2>
+      <h2>Frejs Önskelista</h2>
       <p>
-        Frej&apos;s högsta önskan är så klart att ni kommer på hans kalas. Det
-        tycker vi med. Känn inte att en present är något måste, ge bara om ni
-        kan och ge inte mer än ni har möjlighet till. Om ifall det fortfarande
-        är så att ni vill ge något så har vi en önskan.
+        Frejs högsta önskan är så klart att ni kommer på hans kalas. Det tycker
+        vi med. Känn inte att en present är något måste, ge bara om ni kan och
+        ge inte mer än ni har möjlighet till. Om ifall det fortfarande är så att
+        ni vill ge något så har vi en önskan.
       </p>
       <p>
         I år hade vi hoppas att ni vill hjälpa oss med att samla ihop lite
@@ -38,17 +38,19 @@ export function WishlistHeader({ children }: { children: ReactNode }) {
 
 export function WishlistHero({ hero }: { hero: WishlistItem }) {
   let elTitle = <h3 className="text align-center">{hero.title}</h3>;
-  let elImage = hero.image && <div className={styles.imageWrapper}>
-    <Image
-    src={hero.image}
-    alt="photo of a storage furniture for children"
-    sizes="(max-width: 668px) 100vw, 668px"
-    fill
-    style={{ objectFit: "cover", borderRadius: "inherit" }}
-    />
-  </div>;
-  if(hero.href) {
-    elTitle = <Link href={hero.href}>{elTitle}</Link>
+  let elImage = hero.image && (
+    <div className={styles.imageWrapper}>
+      <Image
+        src={hero.image}
+        alt="photo of a storage furniture for children"
+        sizes="(max-width: 668px) 100vw, 668px"
+        fill
+        style={{ objectFit: "cover", borderRadius: "inherit" }}
+      />
+    </div>
+  );
+  if (hero.href) {
+    elTitle = <Link href={hero.href}>{elTitle}</Link>;
     elImage = hero.image && <Link href={hero.href}>{elImage}</Link>;
   }
   return (
@@ -67,24 +69,15 @@ export function WishlistHero({ hero }: { hero: WishlistItem }) {
   );
 }
 
-export function Wishlist({
-  list,
-  description = null,
-}: {
-  list: WishlistItem[];
-  description?: JSX.Element | null;
-}) {
+export function Wishlist({ list }: { list: WishlistItem[] }) {
   return (
-    <div>
-      {description}
-      <ul className={clsx(styles.list)}>
-        {list.map((item) => (
-          <li key={item.id}>
-            <WishlistItem item={item} />
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul className={clsx(styles.list)}>
+      {list.map((item) => (
+        <li key={item.id}>
+          <WishlistItem item={item} />
+        </li>
+      ))}
+    </ul>
   );
 }
 

@@ -136,8 +136,7 @@ export default async function Page() {
                           {slot.guests.reduce(
                             (c, g) => c + g.adults + g.children,
                             0,
-                          )}{" "}
-                          / {slot.seats}
+                          )}
                         </span>
                       </p>
                     </div>
@@ -161,12 +160,8 @@ export default async function Page() {
           <WishlistHeader>
             {Array.isArray(hero) &&
               hero.map((hero) => <WishlistHero key={hero.id} hero={hero} />)}
-            {Array.isArray(list) && (
-              <Wishlist
-                list={list}
-                description={<p>Annars finns här lite inspirerande idéer</p>}
-              />
-            )}
+            <p>Annars finns här lite inspirerande idéer</p>
+            {Array.isArray(list) && <Wishlist list={list} />}
           </WishlistHeader>
         </section>
       </article>
