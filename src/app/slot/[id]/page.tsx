@@ -1,4 +1,3 @@
-"use server";
 import { SlotForm } from "@/components/slot-form";
 import prisma from "@/lib/prisma";
 import { cookies } from "next/headers";

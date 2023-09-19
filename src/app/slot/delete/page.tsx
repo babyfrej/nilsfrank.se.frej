@@ -1,17 +1,9 @@
 import Image from "next/image";
-import { cookies } from "next/headers";
 import styles from "./page.module.css";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { RedirectTask } from "@/components/redirect-task";
 
 export default async function Page() {
-  const c = cookies().get(process.env.NEXT_PUBLIC_COOKIE_CODE)?.value;
-
-  if (!c) {
-    redirect("/");
-  }
-
   return (
     <div className={styles.main}>
       <div className={styles.header}>
