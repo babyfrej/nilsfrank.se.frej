@@ -1,16 +1,12 @@
 import type { Wishlist, WishlistClaim } from "@prisma/client";
 import clsx from "clsx";
 import Image from "next/image";
+import Link from "next/link";
 import type { ReactNode } from "react";
 import { Markdown } from "./markdown";
 import { Modal, ModalClose } from "./modal";
-import {
-  ClaimHero,
-  WishlistClaimForm,
-  WishlistClaims,
-} from "./wishlist-claim-form";
+import { ClaimHero, WishlistClaims } from "./wishlist-claim-form";
 import styles from "./wishlist.module.css";
-import Link from "next/link";
 
 export type WishlistItem = Pick<
   Wishlist,
