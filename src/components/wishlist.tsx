@@ -3,7 +3,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import type { ReactNode } from "react";
 import { Markdown } from "./markdown";
-import { Modal } from "./modal";
+import { Modal, ModalClose } from "./modal";
 import {
   ClaimHero,
   WishlistClaimForm,
@@ -60,9 +60,10 @@ export function WishlistHero({ hero }: { hero: WishlistItem }) {
       {hero.description && <Markdown content={hero.description} />}
       <div className={styles.collect}>
         <Modal trigger={<button>Va med och samla in</button>}>
-          <WishlistClaimForm item={hero}>
-            <ClaimHero />
-          </WishlistClaimForm>
+          <ClaimHero title={hero.title} id={hero.id} />
+          <div className={styles.actions}>
+            <ModalClose>Stäng</ModalClose>
+          </div>
         </Modal>
       </div>
     </article>

@@ -1,11 +1,12 @@
 "use client";
-import { Clock, Send } from "@/components/icons";
+import { Clock } from "@/components/icons";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { useRouter } from "next/navigation";
+import { useCallback } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { type ReactNode, useCallback } from "react";
+import { EmailDisclaimer } from "./email-disclaimer";
 
 const guestProps = z
   .object({
@@ -97,6 +98,7 @@ export function SlotForm({ slot, guest }: Props) {
         <div>
           <label htmlFor="email">
             <span>E-post</span>
+            <EmailDisclaimer />
             <input autoFocus type="email" {...register("email")} />
             {errors.email?.message && (
               <span className="text sm">{errors.email.message}</span>

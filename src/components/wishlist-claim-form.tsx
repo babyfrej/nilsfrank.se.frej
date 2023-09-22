@@ -2,12 +2,15 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
 import cookie from "js-cookie";
-import { useId, useState, type ReactNode } from "react";
+import { useId, useState, type ReactNode, useMemo } from "react";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import { z } from "zod";
 import { ModalClose } from "./modal";
 import styles from "./wishlist.module.css";
 import type { WishlistItem } from "./wishlist";
+import { EmailDisclaimer } from "./email-disclaimer";
+import Link from "next/link";
+import Image from "next/image";
 
 const formFields = z.object({
   email: z.string().nonempty("Email är obligatoriskt").email("Ogiltig email"),
@@ -110,6 +113,7 @@ function ClaimFull({ item: { id, title } }: WishlistClaimsProps) {
     <div>
       <label htmlFor={`${ariaId}-email`}>
         <span>E-post</span>
+        <EmailDisclaimer />
         <input
           type="email"
           id={`${ariaId}-email`}
@@ -137,6 +141,7 @@ function ClaimMultiple({ item: { id, title } }: WishlistClaimsProps) {
       <h4 className="text align-center">{title}</h4>
       <label htmlFor={`${ariaId}-email`}>
         <span>E-post</span>
+        <EmailDisclaimer />
         <input
           type="email"
           id={`${ariaId}-email`}
@@ -165,27 +170,42 @@ function ClaimRange({ item: { price } }: WishlistClaimsProps) {
   );
 }
 
-export function ClaimHero() {
-  const ariaId = useId();
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext<FormFields>();
+export function ClaimHero({ id, title }: { title: string; id: string }) {
   return (
-    <label htmlFor={`${ariaId}-email`}>
-      <span>E-post</span>
-      <input
-        type="email"
-        id={`${ariaId}-email`}
-        {...register("email")}
-        aria-invalid={!!errors.email?.message}
-        aria-errormessage={errors.email?.message && `${ariaId}-email-err`}
-      />
-      {errors.email?.message && (
-        <span id={`${ariaId}-email-err`} className="text sm">
-          {errors.email?.message}
-        </span>
-      )}
-    </label>
+    <div style={{ display: "grid", gap: "2rem", marginBottom: "2rem" }}>
+      <h2 className="text align-center">{title}</h2>
+      <div
+        style={{
+          display: "grid",
+          placeItems: "center",
+          position: "relative",
+          width: "100%",
+          aspectRatio: 1,
+          borderRadius: "2rem",
+          overflow: "hidden",
+        }}
+      >
+        <Image
+          src={`/api/qr/${id}/img.png`}
+          alt="Swish QR"
+          sizes="(max-width: 668px) 80vw, 368px"
+          fill
+        />
+      </div>
+      <Link
+        className="text sm"
+        style={{
+          color: "var(--clr-text)",
+          placeSelf: "center",
+          padding: "0.2rem 1rem",
+          border: "1px solid currentColor",
+          borderRadius: "1rem",
+          textAlign: "center",
+        }}
+        href={`swish://`}
+      >
+        Öppna Swish
+      </Link>
+    </div>
   );
 }
