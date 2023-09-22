@@ -86,7 +86,7 @@ model Wishlist {
   eventId String
   event   Event  @relation(fields: [eventId], references: [id])
 
-  claimType ClaimType       @default(FULL)
+  claimType ClaimType       @default(NO)
   claims    WishlistClaim[]
 }
 
@@ -95,6 +95,7 @@ enum ClaimType {
   FULL
   PARTIAL
   MULTIPLE
+  DONATE
 }
 
 model WishlistClaim {

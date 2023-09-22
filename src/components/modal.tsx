@@ -10,7 +10,7 @@ import {
   type ReactNode,
   type MouseEventHandler,
 } from "react";
-import { modal, scolldisable } from "./modal.css";
+import { dialog, scolldisable } from "./modal.css";
 
 const modalCtx = createContext<{ open: () => void; close: () => void } | null>(
   null,
@@ -52,7 +52,7 @@ export function Modal({
   };
   return (
     <modalCtx.Provider value={value}>
-      <dialog className={modal} ref={ref} onClick={handleClick}>
+      <dialog className={dialog} ref={ref} onClick={handleClick}>
         {children}
       </dialog>
       {button}

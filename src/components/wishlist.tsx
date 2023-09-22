@@ -4,8 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Markdown } from "./markdown";
-import { Modal, ModalClose } from "./modal";
-import { ClaimHero, WishlistClaims } from "./wishlist-claim-form";
+import { Modal } from "./modal";
+import { WishlistClaims } from "./wishlist-claim-form";
+import * as css from "./wishlist.css";
 import styles from "./wishlist.module.css";
 
 export type WishlistItem = Pick<
@@ -15,7 +16,7 @@ export type WishlistItem = Pick<
 
 export function WishlistHeader({ children }: { children: ReactNode }) {
   return (
-    <div className={styles.wishlist}>
+    <div>
       <h2>Frejs Önskelista</h2>
       <p>
         Frejs högsta önskan är så klart att ni kommer på hans kalas. Det tycker
@@ -27,17 +28,17 @@ export function WishlistHeader({ children }: { children: ReactNode }) {
         I år hade vi hoppas att ni vill hjälpa oss med att samla ihop lite
         pengar. Vi har flera saker som vi behöver införskaffa till Frej.
       </p>
-      <div className={styles.content}>{children}</div>
+      <div className={css.content}>{children}</div>
     </div>
   );
 }
 
-export function WishlistHero({ hero }: { hero: WishlistItem }) {
-  let elTitle = <h3 className="text align-center">{hero.title}</h3>;
-  let elImage = hero.image && (
+export function WishlistHero({ item }: { item: WishlistItem }) {
+  let elTitle = <h3 className="text align-center">{item.title}</h3>;
+  let elImage = item.image && (
     <div className={styles.imageWrapper}>
       <Image
-        src={hero.image}
+        src={item.image}
         alt="photo of a storage furniture for children"
         sizes="(max-width: 668px) 100vw, 668px"
         fill
@@ -45,21 +46,18 @@ export function WishlistHero({ hero }: { hero: WishlistItem }) {
       />
     </div>
   );
-  if (hero.href) {
-    elTitle = <Link href={hero.href}>{elTitle}</Link>;
-    elImage = hero.image && <Link href={hero.href}>{elImage}</Link>;
+  if (item.href) {
+    elTitle = <Link href={item.href}>{elTitle}</Link>;
+    elImage = item.image && <Link href={item.href}>{elImage}</Link>;
   }
   return (
     <article style={{ paddingBottom: "4rem" }}>
       {elTitle}
       {elImage}
-      {hero.description && <Markdown content={hero.description} />}
-      <div className={styles.collect}>
+      {item.description && <Markdown content={item.description} />}
+      <div className={css.collect}>
         <Modal trigger={<button>Va med och samla in</button>}>
-          <ClaimHero title={hero.title} id={hero.id} />
-          <div className={styles.actions}>
-            <ModalClose>Stäng</ModalClose>
-          </div>
+          <WishlistClaims item={item} />
         </Modal>
       </div>
     </article>
@@ -112,18 +110,18 @@ function WishlistItem({
             <WishlistClaims item={item} />
           </Modal>
         ) : (
-          <button disabled className="reset">
-            {(() => {
-              switch (claimType) {
-                case "FULL":
-                  return "Bokad";
-                case "PARTIAL":
-                  return "Delvis uppfyllt";
-                case "NO":
-                  return "";
-              }
-            })()}
-          </button>
+          (() => {
+            switch (claimType) {
+              case "FULL":
+                return (
+                  <button disabled className="reset">
+                    Bokad
+                  </button>
+                );
+              default:
+                null;
+            }
+          })()
         )}
       </div>
     </div>
@@ -139,6 +137,7 @@ const isAvailable = (item: WishlistItem) => {
         ? true
         : item.price <= item.claims.reduce((acc, c) => (acc += c.amount), 0);
     case "MULTIPLE":
+    case "DONATE":
       return true;
     case "NO":
     default:

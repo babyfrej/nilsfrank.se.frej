@@ -1,16 +1,17 @@
 "use client";
+import { useCookie } from "@/hooks/useCookie";
 import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
-import cookie from "js-cookie";
-import { useId, useState, type ReactNode, useMemo } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useId, useState, type ReactNode } from "react";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import { z } from "zod";
-import { ModalClose } from "./modal";
-import styles from "./wishlist.module.css";
-import type { WishlistItem } from "./wishlist";
 import { EmailDisclaimer } from "./email-disclaimer";
-import Link from "next/link";
-import Image from "next/image";
+import { ModalClose } from "./modal";
+import type { WishlistItem } from "./wishlist";
+import { qrWrapper } from "./wishlist-claim-form.css";
+import styles from "./wishlist.module.css";
 
 const formFields = z.object({
   email: z.string().nonempty("Email är obligatoriskt").email("Ogiltig email"),
@@ -25,7 +26,7 @@ type Props = {
 
 export function WishlistClaimForm({ item, children }: Props) {
   const [submitted, setSubmitted] = useState(false);
-  const email = cookie.get(process.env.NEXT_PUBLIC_COOKIE_CODE);
+  const email = useCookie(process.env.NEXT_PUBLIC_COOKIE_CODE);
   const form = useForm<FormFields>({
     resolver: zodResolver(formFields),
     defaultValues: {
@@ -87,20 +88,35 @@ export function WishlistClaims({
   item: { claimType },
   item,
 }: WishlistClaimsProps) {
-  return (
-    <WishlistClaimForm item={item}>
-      {(() => {
-        switch (claimType) {
-          case "FULL":
-            return <ClaimFull item={item} />;
-          case "MULTIPLE":
-            return <ClaimMultiple item={item} />;
-          case "PARTIAL":
-            return <ClaimRange item={item} />;
-        }
-      })()}
-    </WishlistClaimForm>
-  );
+  switch (claimType) {
+    case "FULL":
+      return (
+        <WishlistClaimForm item={item}>
+          <ClaimFull item={item} />
+        </WishlistClaimForm>
+      );
+    case "MULTIPLE":
+      return (
+        <WishlistClaimForm item={item}>
+          <ClaimMultiple item={item} />
+        </WishlistClaimForm>
+      );
+    case "PARTIAL":
+      return (
+        <WishlistClaimForm item={item}>
+          <ClaimRange item={item} />
+        </WishlistClaimForm>
+      );
+    case "DONATE":
+      return (
+        <div>
+          <ClaimDonate item={item} />
+          <div className={styles.actions}>
+            <ModalClose type="button">Stäng</ModalClose>
+          </div>
+        </div>
+      );
+  }
 }
 
 function ClaimFull({ item: { id, title } }: WishlistClaimsProps) {
@@ -170,21 +186,11 @@ function ClaimRange({ item: { price } }: WishlistClaimsProps) {
   );
 }
 
-export function ClaimHero({ id, title }: { title: string; id: string }) {
+export function ClaimDonate({ item: { id, title } }: WishlistClaimsProps) {
   return (
-    <div style={{ display: "grid", gap: "2rem", marginBottom: "2rem" }}>
+    <div style={{ display: "grid", marginBlockEnd: "1rem" }}>
       <h2 className="text align-center">{title}</h2>
-      <div
-        style={{
-          display: "grid",
-          placeItems: "center",
-          position: "relative",
-          width: "100%",
-          aspectRatio: 1,
-          borderRadius: "2rem",
-          overflow: "hidden",
-        }}
-      >
+      <div className={qrWrapper}>
         <Image
           src={`/api/qr/${id}/img.png`}
           alt="Swish QR"

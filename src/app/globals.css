@@ -32,6 +32,7 @@
   --fs-300: 0.9rem;
   --fs-200: 0.75rem;
   --fs-100: 0.5rem;
+  --fw-thin: 300;
   --fw-bold: 800;
 
   --surface: transparent;
@@ -120,6 +121,9 @@
   &.align-center {
     text-align: center;
   }
+  &.thin {
+    font-weight: var(--fw-thin);
+  }
 }
 
 .grey {
@@ -154,18 +158,6 @@ svg {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-dialog {
-  --dlg-bg: var(--clr-tertiary);
-  --dlg-bg-mix: hsl(0, 0%, 100%);
-  color: currentColor;
-  border-radius: 32px;
-  width: min(90vw, 400px);
-  background-color: var(--dlg-bg);
-  border: 1px solid color-mix(in lab, var(--dlg-bg) 60%, var(--dlg-bg-mix));
-  border-block-end: none;
-  box-shadow: 0 19px 38px rgba(0,0,0,0.60), 0 15px 12px rgba(0,0,0,0.22);
 }
 
 input, textarea {

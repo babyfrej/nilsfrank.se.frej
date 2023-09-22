@@ -158,7 +158,7 @@ export default async function Page() {
         <section>
           <WishlistHeader>
             {Array.isArray(hero) &&
-              hero.map((hero) => <WishlistHero key={hero.id} hero={hero} />)}
+              hero.map((hero) => <WishlistHero key={hero.id} item={hero} />)}
             <p>Annars finns här lite inspirerande idéer</p>
             {Array.isArray(list) && <Wishlist list={list} />}
           </WishlistHeader>

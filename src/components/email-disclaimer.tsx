@@ -1,5 +1,5 @@
 export const EmailDisclaimer = () => (
-  <span className="text sm">
-    Din email används endast för att du ska kunna uppdatera din bokning.
-  </span>
+  <h5 className="text sm thin">
+    Din e-post används endast för att du ska kunna uppdatera din reservation.
+  </h5>
 );
