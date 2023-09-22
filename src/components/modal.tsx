@@ -10,6 +10,7 @@ import {
   type ReactNode,
   type MouseEventHandler,
 } from "react";
+import { modal, scolldisable } from "./modal.css";
 
 const modalCtx = createContext<{ open: () => void; close: () => void } | null>(
   null,
@@ -33,18 +34,25 @@ export function Modal({
   const value = useMemo(() => {
     const close = () => {
       ref.current!.close();
+      document.body.classList.remove(scolldisable);
     };
     const open = () => {
       ref.current!.showModal();
+      document.body.classList.add(scolldisable);
     };
     return { open, close };
   }, []);
   const button = cloneElement(trigger as any, {
     onClick: value.open,
   });
+  const handleClick: MouseEventHandler = (e) => {
+    if (e.target === ref.current) {
+      value.close();
+    }
+  };
   return (
     <modalCtx.Provider value={value}>
-      <dialog ref={ref} style={{ overflow: "visible" }}>
+      <dialog className={modal} ref={ref} onClick={handleClick}>
         {children}
       </dialog>
       {button}
