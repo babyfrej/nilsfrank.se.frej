@@ -15,6 +15,7 @@ const guestProps = z
     adults: z.number().int().min(1).optional(),
     children: z.number().int().min(0).optional(),
     notes: z.string().optional().nullish(),
+    attending: z.boolean().optional(),
   })
   .optional();
 const props = z.object({
@@ -84,7 +85,7 @@ export function SlotForm({ slot, guest }: Props) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <input type="hidden" {...register("reservationId")} />
-      <div style={{ display: "grid", rowGap: "1rem" }}>
+      <div>
         <h2 className="text align-center" style={{ color: "inherit" }}>
           {slot.start && format(slot.start, "yyyy-MM-dd")}
         </h2>
@@ -127,7 +128,7 @@ export function SlotForm({ slot, guest }: Props) {
         </div>
         <div>
           <label htmlFor="notes">
-            <b>Matrestriktioner</b>
+            <span>Matrestriktioner</span>
             <textarea
               rows={3}
               {...register("notes")}
@@ -136,7 +137,7 @@ export function SlotForm({ slot, guest }: Props) {
           </label>
         </div>
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          {guest && (
+          {guest?.attending && (
             <button type="button" className="reset" onClick={onDelete}>
               Ta bort
             </button>
