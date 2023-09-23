@@ -18,7 +18,7 @@ export default async function Page({
       end: true,
       seats: true,
       guests: {
-        where: { email: email ?? "" },
+        where: { email: email ?? "", attending: { not: false } },
         select: {
           name: true,
           attending: true,

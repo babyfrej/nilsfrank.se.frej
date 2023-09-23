@@ -20,15 +20,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(inputs.error.errors, { status: 400 });
   }
   try {
+    const reservation = { ...inputs.data, attending: true };
     await prisma.guests.upsert({
-      create: {
-        attending: true,
-        ...inputs.data,
-      },
-      update: {
-        attending: true,
-        ...inputs.data,
-      },
+      create: reservation,
+      update: reservation,
       where: {
         email: inputs.data.email,
         reservationId: inputs.data.reservationId,
@@ -70,8 +65,9 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json(inputs.error.errors, { status: 400 });
   }
   try {
-    await prisma.guests.delete({
+    await prisma.guests.update({
       where: { email, reservationId: inputs.data.reservationId },
+      data: { attending: false, deletedAt: new Date() },
     });
   } catch (e) {
     return NextResponse.json(
