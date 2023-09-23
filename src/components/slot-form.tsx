@@ -1,7 +1,7 @@
 "use client";
 import { Clock } from "@/components/icons";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { format } from "date-fns";
+import { format } from "@/utils/format";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";

@@ -1,10 +1,10 @@
-import prisma from "@/lib/prisma";
-import Image from "next/image";
-import { format } from "date-fns";
-import Link from "next/link";
 import { Clock, Event, Location, Person } from "@/components/icons";
-import { Wishlist, WishlistHeader, WishlistHero } from "@/components/wishlist";
 import { Markdown } from "@/components/markdown";
+import { Wishlist, WishlistHeader, WishlistHero } from "@/components/wishlist";
+import prisma from "@/lib/prisma";
+import { format } from "@/utils/format";
+import Image from "next/image";
+import Link from "next/link";
 
 export default async function Page() {
   const [event, hero, list] = await prisma.$transaction([
@@ -74,6 +74,7 @@ export default async function Page() {
       },
     }),
   ]);
+
   return (
     <main>
       <article>
