@@ -1,9 +1,9 @@
 import prisma from "@/lib/prisma";
-import type { NextApiRequest } from "next";
+import type { NextRequest } from "next/server";
 
 export const revalidate = 60 * 60 * 24 * 7 * 365;
 export async function GET(
-  req: NextApiRequest,
+  req: NextRequest,
   { params: { id } }: { params: { id: string } },
 ) {
   if (!id) {
