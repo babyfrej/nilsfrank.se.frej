@@ -15,6 +15,7 @@
     "@prisma/client": "^5.2.0",
     "@types/js-cookie": "^3.0.3",
     "@vanilla-extract/css": "^1.13.0",
+    "@vanilla-extract/dynamic": "^2.0.3",
     "@vercel/analytics": "^1.0.2",
     "clsx": "^1.2.1",
     "date-fns": "^2.30.0",

@@ -8,6 +8,7 @@ import { Modal } from "./modal";
 import { WishlistClaims } from "./wishlist-claim-form";
 import * as css from "./wishlist.css";
 import styles from "./wishlist.module.css";
+import { WishlistItem } from "./wishlist-item";
 
 export type WishlistItem = Pick<
   Wishlist,
@@ -75,72 +76,3 @@ export function Wishlist({ list }: { list: WishlistItem[] }) {
     </ul>
   );
 }
-
-type WishlistItemProps = {
-  item: WishlistItem;
-};
-function WishlistItem({
-  item,
-  item: { title, description, claimType, href, image },
-}: WishlistItemProps) {
-  let elTitle = <h4>{title}</h4>;
-  let elImage = image && (
-    <Image
-      src={image}
-      alt={title}
-      width={80}
-      height={80}
-      className={styles.image}
-    />
-  );
-  if (href) {
-    elTitle = <Link href={href}>{elTitle}</Link>;
-    elImage = image && <Link href={href}>{elImage}</Link>;
-  }
-  return (
-    <div className={clsx(styles.item, { [styles.image]: !!elImage })}>
-      {elImage}
-      <div className={styles.card}>
-        {elTitle}
-        {description && <Markdown content={description} />}
-      </div>
-      <div className={styles.claim}>
-        {isAvailable(item) ? (
-          <Modal trigger={<button className="reset">Välj</button>}>
-            <WishlistClaims item={item} />
-          </Modal>
-        ) : (
-          (() => {
-            switch (claimType) {
-              case "FULL":
-                return (
-                  <button disabled className="reset">
-                    Bokad
-                  </button>
-                );
-              default:
-                null;
-            }
-          })()
-        )}
-      </div>
-    </div>
-  );
-}
-
-const isAvailable = (item: WishlistItem) => {
-  switch (item.claimType) {
-    case "FULL":
-      return !item.claims.some((c) => Boolean(c.email));
-    case "PARTIAL":
-      return item.price === null
-        ? true
-        : item.price <= item.claims.reduce((acc, c) => (acc += c.amount), 0);
-    case "MULTIPLE":
-    case "DONATE":
-      return true;
-    case "NO":
-    default:
-      return false;
-  }
-};
