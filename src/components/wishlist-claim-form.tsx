@@ -193,6 +193,7 @@ export function ClaimDonate({ item: { id, title } }: WishlistClaimsProps) {
       <div className={qrWrapper}>
         <Image
           src={`/api/qr/${id}/img.png`}
+          priority
           alt="Swish QR"
           sizes="(max-width: 668px) 80vw, 368px"
           fill
