@@ -15,13 +15,7 @@ export const metadata: Metadata = {
     default: "Kalas - Frej Nils Frank",
     template: "%s - Frej Nils Frank",
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-  },
   description: "",
-  themeColor: "hsl(15, 71%, 79%)",
   icons: {
     icon: "/favicon-16x16.png",
     shortcut: "/favicon-32x32.png",

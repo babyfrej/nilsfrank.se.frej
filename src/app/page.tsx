@@ -3,8 +3,16 @@ import { Markdown } from "@/components/markdown";
 import { Wishlist, WishlistHeader, WishlistHero } from "@/components/wishlist";
 import prisma from "@/lib/prisma";
 import { format } from "@/utils/format";
+import type { Viewport } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: "hsl(15, 71%, 79%)",
+};
 
 export default async function Page() {
   const [event, hero, list] = await prisma.$transaction([
