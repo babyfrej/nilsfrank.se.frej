@@ -17,12 +17,12 @@ export const metadata: Metadata = {
   },
   description: "",
   icons: {
-    icon: "/favicon-16x16.png",
-    shortcut: "/favicon-32x32.png",
-    apple: "/apple-icon.png",
+    icon: "/icons/favicon-16x16.png",
+    shortcut: "/icons/favicon-32x32.png",
+    apple: "/icons/apple-icon.png",
     other: {
       rel: "apple-touch-icon-precomposed",
-      url: "/apple-touch-icon.png",
+      url: "/icons/apple-touch-icon.png",
     },
   },
   openGraph: {
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     siteName: "Kalas för Frej Nils Frank",
     images: [
       {
-        url: "https://frej.nilsfrank.se/android-chrome-512x512.png",
+        url: "https://frej.nilsfrank.se/icons/android-chrome-512x512.png",
         width: 48,
         height: 48,
       },
