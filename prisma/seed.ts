@@ -30,18 +30,18 @@ async function main() {
         slots: {
           create: [
             {
-              start: new Date("2023-10-14 11:00:00+00"),
-              end: new Date("2023-10-14 15:00:00+00"),
+              start: new Date("2024-10-14 11:00:00+00"),
+              end: new Date("2024-10-14 15:00:00+00"),
               seats: 15,
             },
             {
-              start: new Date("2023-10-14 15:00:00+00"),
-              end: new Date("2023-10-14 18:00:00+00"),
+              start: new Date("2024-10-14 15:00:00+00"),
+              end: new Date("2024-10-14 18:00:00+00"),
               seats: 15,
             },
             {
-              start: new Date("2023-10-15 11:00:00+00"),
-              end: new Date("2023-10-15 15:00:00+00"),
+              start: new Date("2024-10-15 11:00:00+00"),
+              end: new Date("2024-10-15 15:00:00+00"),
               seats: 15,
             },
           ],
