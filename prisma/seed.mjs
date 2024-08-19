@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { ClaimType } from "../src/types/claim-type";
 
 const prisma = new PrismaClient();
 
@@ -20,7 +21,7 @@ async function main() {
               create: {
                 name: "Niklas",
                 email: "niklas.frank@gmail.com",
-                phone: "0722133743",
+                phone: "0738557855",
                 message: "Vid frågor kontakta Niklas på telefon",
               },
             },
@@ -56,7 +57,7 @@ async function main() {
                 Det kommer även att bidra till en mer strukturerad och trivsam miljö för honom att växa upp i.`,
               image: "/montisory-shelf.webp",
               href: "https://lovevery.com/products/the-montessori-playshelf",
-              claimType: "PARTIAL",
+              claimType: ClaimType.PARTIAL,
               price: 4400,
               hero: true,
             },
@@ -65,7 +66,7 @@ async function main() {
               description: `Vi tycker det är dags att ge Frej en helt egen säng på sitt rum. En säng vi kan läsa godnattsagor, ta en tuplur, och som han kan sova i när han är redo för det.
               Vi har hittat en sängram som vi tycker är både fin och praktisk, och som vi tror kommer att passa perfekt i Frej&apos;s rum.`,
               image: "/bedframe.webp",
-              claimType: "PARTIAL",
+              claimType: ClaimType.PARTIAL,
               price: 3800,
               hero: true,
             },
@@ -74,19 +75,19 @@ async function main() {
               description: `Frej älskar sina böcker väldigt mycket. Han är verkligen nyfiken på alla djuren vi läser om, fåglar, fiskar, och koalor, elefanter och giraffer.
               Han älskar att peka på alla bilder och lyssna på när vi läser för honom. Vill ni ge honom en bok så är det en gåva som vi vet kommer att uppskattas.
               Böcker vår planet, våra djur, och vår natur är fortfarande extra uppskattade.`,
-              claimType: "MULTIPLE",
+              claimType: ClaimType.MULTIPLE,
             },
             {
               title: "Presentkort till kläder",
               description:
                 "Med ett presentkort kan vi köpa lite kläder allt efter som behovet uppstår",
-              claimType: "MULTIPLE",
+              claimType: ClaimType.MULTIPLE,
             },
             {
               title: "Sparande",
               description:
                 "Vill du vara med och utöka Frej&apos;s sparkonto? Swisha valfritt belopp",
-              claimType: "NO",
+              claimType: ClaimType.NO,
             },
           ],
         },
@@ -101,4 +102,4 @@ async function main() {
   }
 }
 
-main();
+await main();

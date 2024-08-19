@@ -1,5 +1,5 @@
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -71,13 +71,13 @@ model Guests {
 }
 
 model Wishlist {
-  id          String   @id @default(uuid())
+  id          String  @id @default(uuid())
   title       String
   description String?
   href        String?
   image       String?
   price       Int?
-  hero        Boolean  @default(false)
+  hero        Boolean @default(false)
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -86,16 +86,8 @@ model Wishlist {
   eventId String
   event   Event  @relation(fields: [eventId], references: [id])
 
-  claimType ClaimType       @default(NO)
+  claimType Int             @default(0)
   claims    WishlistClaim[]
-}
-
-enum ClaimType {
-  NO
-  FULL
-  PARTIAL
-  MULTIPLE
-  DONATE
 }
 
 model WishlistClaim {
