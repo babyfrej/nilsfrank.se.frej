@@ -5,9 +5,9 @@
   "scripts": {
     "dotenvx": "dotenvx",
     "postinstall": "prisma generate",
-    "dev": "dotenvx run -f .env -f .env.development -- next dev",
-    "build": "dotenvx run -- next build",
-    "start": "dotenvx run -- next start",
+    "dev": "dotenvx run --convention=nextjs -- next dev",
+    "build": "dotenvx run --convention=nextjs -- next build",
+    "start": "dotenvx run --convention=nextjs -- next start",
     "lint": "next lint"
   },
   "dependencies": {
