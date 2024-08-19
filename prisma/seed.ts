@@ -55,7 +55,7 @@ async function main() {
 
                 Denna möbel kommer att vara till stor nytta under de kommande åren i att hjälpa Frej att hålla ordning i sitt rum.
                 Det kommer även att bidra till en mer strukturerad och trivsam miljö för honom att växa upp i.`,
-              image: "/montisory-shelf.webp",
+              image: "/images/montisory-shelf.webp",
               href: "https://lovevery.com/products/the-montessori-playshelf",
               claimType: ClaimType.PARTIAL,
               price: 4400,
@@ -65,7 +65,7 @@ async function main() {
               title: "Säng",
               description: `Vi tycker det är dags att ge Frej en helt egen säng på sitt rum. En säng vi kan läsa godnattsagor, ta en tuplur, och som han kan sova i när han är redo för det.
               Vi har hittat en sängram som vi tycker är både fin och praktisk, och som vi tror kommer att passa perfekt i Frej&apos;s rum.`,
-              image: "/bedframe.webp",
+              image: "/images/bedframe.webp",
               claimType: ClaimType.PARTIAL,
               price: 3800,
               hero: true,
