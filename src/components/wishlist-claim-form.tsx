@@ -14,7 +14,7 @@ import { qrWrapper } from "./wishlist-claim-form.css";
 import styles from "./wishlist.module.css";
 
 const formFields = z.object({
-  email: z.string().nonempty("Email är obligatoriskt").email("Ogiltig email"),
+  email: z.string().min(1, "Email är obligatoriskt").email("Ogiltig email"),
 });
 
 type FormFields = z.infer<typeof formFields>;
