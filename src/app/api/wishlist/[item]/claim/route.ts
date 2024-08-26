@@ -6,7 +6,7 @@ import { z } from "zod";
 const wishlistClaim = z.object({
   email: z
     .string()
-    .nonempty("en e-postadress är obligatorisk")
+    .min(1, "en e-postadress är obligatorisk")
     .email("Ogiltig e-postadress"),
 });
 
