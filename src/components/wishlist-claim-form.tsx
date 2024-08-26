@@ -12,6 +12,7 @@ import { ModalClose } from "./modal";
 import type { WishlistItem } from "./wishlist";
 import { qrWrapper } from "./wishlist-claim-form.css";
 import styles from "./wishlist.module.css";
+import { ClaimType } from "@/types/claim-type";
 
 const formFields = z.object({
   email: z.string().min(1, "Email är obligatoriskt").email("Ogiltig email"),
@@ -89,25 +90,25 @@ export function WishlistClaims({
   item,
 }: WishlistClaimsProps) {
   switch (claimType) {
-    case "FULL":
+    case ClaimType.FULL:
       return (
         <WishlistClaimForm item={item}>
           <ClaimFull item={item} />
         </WishlistClaimForm>
       );
-    case "MULTIPLE":
+    case ClaimType.MULTIPLE:
       return (
         <WishlistClaimForm item={item}>
           <ClaimMultiple item={item} />
         </WishlistClaimForm>
       );
-    case "PARTIAL":
+    case ClaimType.PARTIAL:
       return (
         <WishlistClaimForm item={item}>
           <ClaimRange item={item} />
         </WishlistClaimForm>
       );
-    case "DONATE":
+    case ClaimType.DONATE:
       return (
         <div>
           <ClaimDonate item={item} />
