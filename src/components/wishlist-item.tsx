@@ -6,8 +6,8 @@ import type { WishlistItem } from "./wishlist";
 import { WishlistClaims } from "./wishlist-claim-form";
 import * as css from "./wishlist-item.css";
 import { hsla } from "@/utils/hsla";
-import { assignVars } from "@vanilla-extract/css";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
+import { ClaimType } from "@/types/claim-type";
 
 type WishlistItemProps = {
   item: WishlistItem;
@@ -59,7 +59,7 @@ export function WishlistItem({
             ) : (
               (() => {
                 switch (claimType) {
-                  case "FULL":
+                  case ClaimType.FULL:
                     return (
                       <button disabled className="reset">
                         Bokad
@@ -80,16 +80,16 @@ export function WishlistItem({
 
 const isAvailable = (item: WishlistItem) => {
   switch (item.claimType) {
-    case "FULL":
+    case ClaimType.FULL:
       return !item.claims.some((c) => Boolean(c.email));
-    case "PARTIAL":
+    case ClaimType.PARTIAL:
       return item.price === null
         ? true
         : item.price <= item.claims.reduce((acc, c) => (acc += c.amount), 0);
-    case "MULTIPLE":
-    case "DONATE":
+    case ClaimType.MULTIPLE:
+    case ClaimType.DONATE:
       return true;
-    case "NO":
+    case ClaimType.NO:
     default:
       return false;
   }
