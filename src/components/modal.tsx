@@ -9,6 +9,7 @@ import {
   type ButtonHTMLAttributes,
   type ReactNode,
   type MouseEventHandler,
+  type ElementRef,
 } from "react";
 import { dialog, scolldisable } from "./modal.css";
 
@@ -22,6 +23,7 @@ export const useModal = () => {
   }
   return modal;
 };
+
 export function Modal({
   children,
   trigger,
@@ -29,7 +31,7 @@ export function Modal({
   children: ReactNode;
   trigger: ReactNode;
 }) {
-  const ref = useRef<HTMLDialogElement>(null);
+  const ref = useRef<ElementRef<"dialog">>(null);
 
   const value = useMemo(() => {
     const close = () => {
@@ -42,14 +44,18 @@ export function Modal({
     };
     return { open, close };
   }, []);
+
   const button = cloneElement(trigger as any, {
     onClick: value.open,
   });
+
   const handleClick: MouseEventHandler = (e) => {
-    if (e.target === ref.current) {
-      value.close();
+    if (e.target !== ref.current) {
+      return;
     }
+    value.close();
   };
+
   return (
     <modalCtx.Provider value={value}>
       <dialog className={dialog} ref={ref} onClick={handleClick}>
@@ -69,7 +75,9 @@ export function ModalClose({
   const { close } = useModal();
   const handleClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     onClick?.(e);
-    if (e.defaultPrevented) return;
+    if (e.defaultPrevented) {
+      return;
+    }
     close();
   };
   return (
