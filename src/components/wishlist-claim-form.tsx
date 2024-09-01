@@ -13,6 +13,7 @@ import type { WishlistItem } from "./wishlist";
 import { qrWrapper } from "./wishlist-claim-form.css";
 import styles from "./wishlist.module.css";
 import { ClaimType } from "@/types/claim-type";
+import { assert } from "@/utils/assert";
 
 const formFields = z.object({
   email: z.string().min(1, "Email är obligatoriskt").email("Ogiltig email"),
@@ -177,12 +178,14 @@ function ClaimMultiple({ item: { id, title } }: WishlistClaimsProps) {
 }
 
 function ClaimRange({ item: { price } }: WishlistClaimsProps) {
+  const ariaId = useId();
+  assert(price, "item must have a price");
   return (
     <div>
       <div></div>
-      <div>
-        <input type="number" min="0" />
-      </div>
+      <label htmlFor={`${ariaId}-price`}>
+        <input type="number" min="0" max={price} />
+      </label>
     </div>
   );
 }
