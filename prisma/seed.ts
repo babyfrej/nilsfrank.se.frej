@@ -48,46 +48,130 @@ async function main() {
         },
         wishlist: {
           create: [
+            // hero items
             {
-              title: "Förvaringsmöbel",
-              description: `Just nu ligger många av Frej&apos;s saker utspridda i hans rum, vilket gör det svårt för oss att låta honom vara där och leka på ett säkert sätt.
-                Vi saknar bra utrymmen för hans saker och planerar att köpa en förvaringsmöbel för alla hans småsaker.
-
-                Denna möbel kommer att vara till stor nytta under de kommande åren i att hjälpa Frej att hålla ordning i sitt rum.
-                Det kommer även att bidra till en mer strukturerad och trivsam miljö för honom att växa upp i.`,
-              image: "/images/montisory-shelf.webp",
-              href: "https://lovevery.com/products/the-montessori-playshelf",
-              claimType: ClaimType.PARTIAL,
-              price: 4400,
+              title: "ClaimType(No, Hero)",
+              description:
+                "A Wishlist item that is highlighted above the rest of the wishlist for maximum exposure",
+              image: "/images/bedframe.webp",
+              claimType: ClaimType.NO,
               hero: true,
             },
             {
-              title: "Säng",
-              description: `Vi tycker det är dags att ge Frej en helt egen säng på sitt rum. En säng vi kan läsa godnattsagor, ta en tuplur, och som han kan sova i när han är redo för det.
-              Vi har hittat en sängram som vi tycker är både fin och praktisk, och som vi tror kommer att passa perfekt i Frej&apos;s rum.`,
+              title: "ClaimType(Full, Hero)",
+              description:
+                "A Wishlist item that is highlighted above the rest of the wishlist for maximum exposure",
+              image: "/images/bedframe.webp",
+              claimType: ClaimType.FULL,
+              price: 100,
+              hero: true,
+            },
+            {
+              title: "ClaimType(Partial, Hero)",
+              description:
+                "A Wishlist item that is highlighted above the rest of the wishlist for maximum exposure",
               image: "/images/bedframe.webp",
               claimType: ClaimType.PARTIAL,
-              price: 3800,
+              price: 5,
               hero: true,
             },
             {
-              title: "Böcker",
-              description: `Frej älskar sina böcker väldigt mycket. Han är verkligen nyfiken på alla djuren vi läser om, fåglar, fiskar, och koalor, elefanter och giraffer.
-              Han älskar att peka på alla bilder och lyssna på när vi läser för honom. Vill ni ge honom en bok så är det en gåva som vi vet kommer att uppskattas.
-              Böcker vår planet, våra djur, och vår natur är fortfarande extra uppskattade.`,
+              title: "ClaimType(Multiple, Hero)",
+              description:
+                "A Wishlist item that is highlighted above the rest of the wishlist for maximum exposure",
+              image: "/images/bedframe.webp",
               claimType: ClaimType.MULTIPLE,
+              hero: true,
             },
             {
-              title: "Presentkort till kläder",
+              title: "ClaimType(Donate , Hero)",
               description:
-                "Med ett presentkort kan vi köpa lite kläder allt efter som behovet uppstår",
-              claimType: ClaimType.MULTIPLE,
+                "A Wishlist item that is highlighted above the rest of the wishlist for maximum exposure",
+              image: "/images/bedframe.webp",
+              claimType: ClaimType.DONATE,
+              price: 5000,
+              hero: true,
             },
+            // wishlist items
             {
-              title: "Sparande",
+              title: "ClaimType(No)",
               description:
-                "Vill du vara med och utöka Frej&apos;s sparkonto? Swisha valfritt belopp",
+                "A wishlist item that is not claimable, i.e. open donation.",
               claimType: ClaimType.NO,
+            },
+            {
+              title: "ClaimType(Full) claimable",
+              description: "A wishlist item that is claimable by one only",
+              claimType: ClaimType.FULL,
+            },
+            {
+              title: "ClaimType(Full) not claimable",
+              description: "A wishlist item that is claimable by one only",
+              claimType: ClaimType.FULL,
+              claims: {
+                create: [{ email: "example@nilsfrank.se", amount: 0 }],
+              },
+            },
+            {
+              title: "ClaimType(Partial)",
+              description:
+                "a wishlist item that is claimable by people grouping up to buy it together",
+              claimType: ClaimType.PARTIAL,
+              price: 5,
+            },
+            {
+              title: "ClaimType(Multiple) no claims",
+              description:
+                "a wishlist item that is claimable by multiple people, i.e. something unspecific like books",
+              claimType: ClaimType.MULTIPLE,
+            },
+            {
+              title: "ClaimType(Multiple) with claims",
+              description:
+                "a wishlist item that is claimable by multiple people, i.e. something unspecific like books",
+              claimType: ClaimType.MULTIPLE,
+              claims: {
+                create: [
+                  { email: "a@nilsfrank.se", amount: 0 },
+                  { email: "b@nilsfrank.se", amount: 0 },
+                  { email: "c@nilsfrank.se", amount: 0 },
+                  { email: "d@nilsfrank.se", amount: 0 },
+                ],
+              },
+            },
+            {
+              title: "ClaimType(Donate) no donations",
+              description:
+                "a wishlist item that is so big that people can pitch in with a bit of cash to the total pot",
+              claimType: ClaimType.DONATE,
+              price: 1,
+            },
+            {
+              title: "ClaimType(Donate) has donations",
+              description:
+                "a wishlist item that is so big that people can pitch in with a bit of cash to the total pot",
+              claimType: ClaimType.DONATE,
+              price: 5000,
+              claims: {
+                create: [
+                  {
+                    email: "a@nilsfrank.se",
+                    amount: 100,
+                  },
+                  {
+                    email: "b@nilsfrank.se",
+                    amount: 200,
+                  },
+                  {
+                    email: "c@nilsfrank.se",
+                    amount: 1000,
+                  },
+                  {
+                    email: "d@nilsfrank.se",
+                    amount: 10,
+                  },
+                ],
+              },
             },
           ],
         },
