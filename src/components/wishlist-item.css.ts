@@ -29,6 +29,12 @@ export const actions = style({
 });
 
 export const dotColorVar = createVar();
+
+export const dots = style({
+  display: "flex",
+  alignItems: "center",
+});
+
 export const dot = style({
   vars: {
     "--dot-size": "1.2rem",

@@ -39,7 +39,7 @@ export function WishlistItem({
           {elTitle}
           <div className={css.actions}>
             {Boolean(item.claims?.length) && (
-              <div>
+              <div className={css.dots}>
                 {hsla(
                   { saturation: 80, lightness: 76, alpha: 1 },
                   item.claims.length,
