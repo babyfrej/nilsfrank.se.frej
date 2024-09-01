@@ -178,6 +178,9 @@ async function main() {
       },
     });
     console.log("Seeding finished. New Event ID", event.id);
+    console.log(
+      `dotenvx set -f .env.development.local --plain EVENT_ID ${event.id}`,
+    );
   } catch (error) {
     console.error(error);
     process.exit(1);
