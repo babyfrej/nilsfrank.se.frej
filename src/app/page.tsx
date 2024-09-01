@@ -103,7 +103,7 @@ export default async function Page() {
             )}
           </div>
         </section>
-        <section className="bg-secondary details">
+        <section className="bg-tertiary details">
           <div>
             <h2 className="media subheading text info">
               <Location />

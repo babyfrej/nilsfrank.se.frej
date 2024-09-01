@@ -1,38 +1,46 @@
 :root {
   --clr-body: hsla(0, 0%, 20%, 0.9);
   --clr-text-hsl: 0 0% 6%;
-  --clr-text: hsla(0, 0%, 6%, 0.75);
+  --clr-text: hsla(0, 0%, 7%, 0.8);
 
-  --clr-primary: hsl(266, 48%, 77%);
-  --clr-secondary: hsl(155, 35%, 90%, 0.8);
-  --clr-tertiary-h: 3;
-  --clr-tertiary-s: 68%;
-  --clr-tertiary-l: 57%;
+  --clr-primary: hsl(243, 23%, 32%);
+  --clr-secondary: hsl(204, 95%, 91%);
+  --clr-tertiary-h: 44;
+  --clr-tertiary-s: 77%;
+  --clr-tertiary-l: 70%;
   --clr-tertiary: hsl(
     var(--clr-tertiary-h),
     var(--clr-tertiary-s),
     var(--clr-tertiary-l)
   );
-  --clr-accent-h: 244;
-  --clr-accent-s: 45%;
-  --clr-accent-l: 42%;
+  --clr-accent-h: 0;
+  --clr-accent-s: 54%;
+  --clr-accent-l: 55%;
   --clr-accent-a: 1;
   --clr-accent: hsla(
     var(--clr-accent-h) var(--clr-accent-s) var(--clr-accent-l) /
       var(--clr-accent-a)
   );
 
-  --bg-body-h: 155;
-  --bg-body-s: 35%;
-  --bg-body-l: 76%;
+  --bg-body-h: 206;
+  --bg-body-s: 90%;
+  --bg-body-l: 75%;
   --bg-body: hsl(var(--bg-body-h), var(--bg-body-s), var(--bg-body-l));
-  --bg-body-secondary-h: 15;
-  --bg-body-secondary-s: 71%;
-  --bg-body-secondary-l: 79%;
+  --bg-body-secondary-h: 204;
+  --bg-body-secondary-s: 95%;
+  --bg-body-secondary-l: 91%;
   --bg-body-secondary: hsl(
     var(--bg-body-secondary-h),
     var(--bg-body-secondary-s),
     var(--bg-body-secondary-l)
+  );
+  --bg-body-tertiary-h: 243;
+  --bg-body-tertiary-s: 23%;
+  --bg-body-tertiary-l: 32%;
+  --bg-body-tertiary: hsl(
+    var(--bg-body-tertiary-h),
+    var(--bg-body-tertiary-s),
+    var(--bg-body-tertiary-l)
   );
 
   --fs-xl: clamp(32px, 4vw + 1rem, 48px);
@@ -54,7 +62,7 @@
 }
 
 ::selection {
-  background: #f0b8a5;
+  background: var(--clr-secondary);
   -webkit-text-fill-color: initial;
 }
 
@@ -153,11 +161,11 @@ body {
 
 footer .with-love h3 {
   margin: 0;
-  color: color-mix(in lab, var(--bg-body) 60%, hsl(0, 0%, 0%));
+  --clr-text:var(--clr-tertiary);
 }
 footer .with-love span {
   font-size: 12px;
-  color: color-mix(in lab, var(--bg-body), var(--clr-text));
+  
 }
 
 img,
@@ -416,11 +424,8 @@ section > * {
 }
 
 footer {
+  --clr-text: var(--bg-body-tertiary);
+  background-color: var(--bg-body-tertiary);
   border-block-start: 1px solid
-    color-mix(in lab, var(--bg-body) 86%, hsl(0, 0%, 100%));
-  background-image: linear-gradient(
-    95deg,
-    color-mix(in lab, var(--bg-body) 86%, hsl(0, 0%, 84%)),
-    color-mix(in lab, var(--bg-body) 86%, hsl(0, 0%, 42%))
-  );
+    color-mix(in lab, var(--bg-body-secondary) 86%, hsl(0, 0%, 100%));
 }
