@@ -1,8 +1,8 @@
-import { PrismaClient } from "@prisma/client";
+import { $ } from "bun";
 import { ClaimType } from "../src/types/claim-type";
+import createClient from "@/lib/prisma.development";
 
-const prisma = new PrismaClient();
-
+const prisma = createClient();
 async function main() {
   try {
     console.log("Start seeding ...");
@@ -10,7 +10,7 @@ async function main() {
       data: {
         details: {
           create: {
-            name: "Välkomna till Frej's Födelsedagskalas",
+            name: "Birthday Party",
             description: `Vi bjuder in till att fira ett år fyllt av glädje, skratt och kärlek. Frej har spridit så mycket lycka omkring sig under detta första magiska år, och vi kan knappt vänta med att dela den här speciella dagen tillsammans med er alla.
             Hjälp oss fira framsteg, första leenden, små steg och alla de stora stunderna som gör att vi känner oss så stolta som föräldrar.
             
@@ -178,9 +178,7 @@ async function main() {
       },
     });
     console.log("Seeding finished. New Event ID", event.id);
-    console.log(
-      `dotenvx set -f .env.development.local --plain EVENT_ID ${event.id}`,
-    );
+    $`dotenvx set -f .env.development ${event.id}`;
   } catch (error) {
     console.error(error);
     process.exit(1);

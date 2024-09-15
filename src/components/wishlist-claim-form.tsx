@@ -29,6 +29,7 @@ type Props = {
 export function WishlistClaimForm({ item, children }: Props) {
   const [submitted, setSubmitted] = useState(false);
   const email = useCookie(process.env.NEXT_PUBLIC_COOKIE_CODE);
+  console.log(email);
   const form = useForm<FormFields>({
     resolver: zodResolver(formFields),
     defaultValues: {

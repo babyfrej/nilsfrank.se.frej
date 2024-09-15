@@ -1,3 +1,4 @@
+"use client";
 import Cookies, { type CookieAttributes } from "js-cookie";
 import { useSyncExternalStore } from "react";
 

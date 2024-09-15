@@ -43,8 +43,9 @@ export async function POST(
     );
   }
 
+  console.log("WOOOOOOOP", process.env.NEXT_PUBLIC_COOKIE_CODE);
   cookies().set(process.env.NEXT_PUBLIC_COOKIE_CODE, inputs.email, {
-    expires: new Date("2023-10-25"),
+    expires: new Date("2024-10-25"),
     sameSite: "strict",
     path: "/",
   });

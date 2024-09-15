@@ -2,12 +2,20 @@ import { Analytics } from "@vercel/analytics/react";
 import { Giraffe } from "@/components/giraffe";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
+import local from "next/font/local";
 import "../lib/env";
 import "./globals.css";
+import clsx from "clsx";
 
 const fontPrimary = Montserrat({
   subsets: ["latin"],
   weight: ["400", "800"],
+  variable: "--font-primary",
+});
+
+const fontTertiary = local({
+  src: "../../public/fonts/blue-custard.woff",
+  variable: "--font-tertiary",
 });
 
 export const metadata: Metadata = {
@@ -55,8 +63,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="sv">
-      <body className={fontPrimary.className}>
+    <html
+      lang="sv"
+      className={clsx(fontPrimary.variable, fontTertiary.variable)}
+    >
+      <body>
         {children}
         <footer>
           <div

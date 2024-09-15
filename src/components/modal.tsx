@@ -10,6 +10,7 @@ import {
   type ReactNode,
   type MouseEventHandler,
   type ElementRef,
+  useState,
 } from "react";
 import { dialog, scolldisable } from "./modal.css";
 
@@ -32,13 +33,16 @@ export function Modal({
   trigger: ReactNode;
 }) {
   const ref = useRef<ElementRef<"dialog">>(null);
+  const [isOpen, setOpen] = useState(false);
 
   const value = useMemo(() => {
     const close = () => {
+      setOpen(false);
       ref.current!.close();
       document.body.classList.remove(scolldisable);
     };
     const open = () => {
+      setOpen(true);
       ref.current!.showModal();
       document.body.classList.add(scolldisable);
     };
@@ -59,7 +63,7 @@ export function Modal({
   return (
     <modalCtx.Provider value={value}>
       <dialog className={dialog} ref={ref} onClick={handleClick}>
-        {children}
+        {isOpen && children}
       </dialog>
       {button}
     </modalCtx.Provider>

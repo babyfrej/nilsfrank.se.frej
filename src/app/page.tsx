@@ -1,11 +1,15 @@
 import { Clock, Event, Location, Person } from "@/components/icons";
-import { Markdown } from "@/components/markdown";
-import { Wishlist, WishlistHeader, WishlistHero } from "@/components/wishlist";
+import { Wishlist, WishlistHeader } from "@/components/wishlist";
+import { WishlistHero } from "@/components/wishlist-hero-item";
 import prisma from "@/lib/prisma";
 import { format } from "@/utils/format";
 import type { Viewport } from "next";
-import Image from "next/image";
 import Link from "next/link";
+import {
+  BlueyTitleCard,
+  BlueyTitleCardDescription,
+  BlueyTitleCardTitle,
+} from "@/components/bluey/title-card";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -86,23 +90,18 @@ export default async function Page() {
   return (
     <main>
       <article>
-        <section className="hero">
-          <div className="hero-img">
-            <Image
-              src="/images/teddy_present_bg.webp"
-              alt="illustration of a teddy bear sitting by a present"
-              priority
-              sizes="(max-width: 668px) 100vw, 668px"
-              fill
-            />
-          </div>
-          <div style={{ backgroundColor: "var(--bg-body)" }}>
-            <h1 className="text align-center">{event?.details?.name}</h1>
-            {event?.details?.description && (
-              <Markdown content={event?.details?.description} />
-            )}
-          </div>
-        </section>
+        {event?.details?.name && (
+          <section style={{ paddingInline: "0" }}>
+            <BlueyTitleCard>
+              <BlueyTitleCardTitle>{event?.details?.name}</BlueyTitleCardTitle>
+              {event?.details?.description && (
+                <BlueyTitleCardDescription
+                  description={event.details?.description}
+                />
+              )}
+            </BlueyTitleCard>
+          </section>
+        )}
         <section className="bg-tertiary details">
           <div>
             <h2 className="media subheading text info">

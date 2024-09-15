@@ -1,11 +1,6 @@
 import type { Wishlist, WishlistClaim } from "@prisma/client";
 import clsx from "clsx";
-import Image from "next/image";
-import Link from "next/link";
 import type { ReactNode } from "react";
-import { Markdown } from "./markdown";
-import { Modal } from "./modal";
-import { WishlistClaims } from "./wishlist-claim-form";
 import * as css from "./wishlist.css";
 import styles from "./wishlist.module.css";
 import { WishlistItem } from "./wishlist-item";
@@ -31,37 +26,6 @@ export function WishlistHeader({ children }: { children: ReactNode }) {
       </p>
       <div className={css.content}>{children}</div>
     </div>
-  );
-}
-
-export function WishlistHero({ item }: { item: WishlistItem }) {
-  let elTitle = <h3 className="text align-center">{item.title}</h3>;
-  let elImage = item.image && (
-    <div className={styles.imageWrapper}>
-      <Image
-        src={item.image}
-        alt="photo of a storage furniture for children"
-        sizes="(max-width: 668px) 100vw, 668px"
-        fill
-        style={{ objectFit: "cover", borderRadius: "inherit" }}
-      />
-    </div>
-  );
-  if (item.href) {
-    elTitle = <Link href={item.href}>{elTitle}</Link>;
-    elImage = item.image && <Link href={item.href}>{elImage}</Link>;
-  }
-  return (
-    <article style={{ paddingBottom: "4rem" }}>
-      {elTitle}
-      {elImage}
-      {item.description && <Markdown content={item.description} />}
-      <div className={css.collect}>
-        <Modal trigger={<button>Va med och samla in</button>}>
-          <WishlistClaims item={item} />
-        </Modal>
-      </div>
-    </article>
   );
 }
 
