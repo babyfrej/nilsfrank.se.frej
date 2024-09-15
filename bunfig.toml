@@ -1,2 +1,0 @@
-[install.scopes]
-nksfrank = { token = "$g@ithub_token", url = "https://npm.pkg.github.com/"}
