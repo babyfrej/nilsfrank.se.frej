@@ -5,21 +5,21 @@ export const card = style({
   gap: "1rem",
 });
 
+export const content = style({
+  flex: "1 1 0%",
+});
+
 export const image = style({
-  vars: {
-    "--image-size": "1",
-  },
-  aspectRatio: "1",
-  height: "var(--image-size)",
+  aspectRatio: "1/1",
   objectFit: "cover",
-  borderRadius: "calc(var(--image-size) / 2)",
+  borderRadius: "0.5rem",
   border: "2px solid color-mix(in lab, var(--bg-body), white 80%)",
 });
 
 export const title = style({
   display: "flex",
   justifyContent: "space-between",
-  alignItems: "baseline",
+  alignItems: "center",
 });
 
 export const actions = style({

@@ -34,7 +34,7 @@ export function WishlistItem({
   return (
     <div className={css.card}>
       {elImage}
-      <div>
+      <div className={css.content}>
         <div className={css.title}>
           {elTitle}
           <div className={css.actions}>

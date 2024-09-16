@@ -53,7 +53,7 @@ async function main() {
               title: "ClaimType(No, Hero)",
               description:
                 "A Wishlist item that is highlighted above the rest of the wishlist for maximum exposure",
-              image: "/images/bedframe.webp",
+              image: "/images/bottle.webp",
               claimType: ClaimType.NO,
               hero: true,
             },
@@ -61,7 +61,7 @@ async function main() {
               title: "ClaimType(Full, Hero)",
               description:
                 "A Wishlist item that is highlighted above the rest of the wishlist for maximum exposure",
-              image: "/images/bedframe.webp",
+              image: "/images/bottle.webp",
               claimType: ClaimType.FULL,
               price: 100,
               hero: true,
@@ -70,7 +70,7 @@ async function main() {
               title: "ClaimType(Partial, Hero)",
               description:
                 "A Wishlist item that is highlighted above the rest of the wishlist for maximum exposure",
-              image: "/images/bedframe.webp",
+              image: "/images/bottle.webp",
               claimType: ClaimType.PARTIAL,
               price: 5,
               hero: true,
@@ -79,7 +79,7 @@ async function main() {
               title: "ClaimType(Multiple, Hero)",
               description:
                 "A Wishlist item that is highlighted above the rest of the wishlist for maximum exposure",
-              image: "/images/bedframe.webp",
+              image: "/images/bottle.webp",
               claimType: ClaimType.MULTIPLE,
               hero: true,
             },
@@ -87,7 +87,7 @@ async function main() {
               title: "ClaimType(Donate , Hero)",
               description:
                 "A Wishlist item that is highlighted above the rest of the wishlist for maximum exposure",
-              image: "/images/bedframe.webp",
+              image: "/images/bottle.webp",
               claimType: ClaimType.DONATE,
               price: 5000,
               hero: true,
@@ -97,16 +97,19 @@ async function main() {
               title: "ClaimType(No)",
               description:
                 "A wishlist item that is not claimable, i.e. open donation.",
+              image: "/images/bottle.webp",
               claimType: ClaimType.NO,
             },
             {
               title: "ClaimType(Full) claimable",
               description: "A wishlist item that is claimable by one only",
+              image: "/images/bottle.webp",
               claimType: ClaimType.FULL,
             },
             {
               title: "ClaimType(Full) not claimable",
               description: "A wishlist item that is claimable by one only",
+              image: "/images/bottle.webp",
               claimType: ClaimType.FULL,
               claims: {
                 create: [{ email: "example@nilsfrank.se", amount: 0 }],
@@ -116,6 +119,7 @@ async function main() {
               title: "ClaimType(Partial)",
               description:
                 "a wishlist item that is claimable by people grouping up to buy it together",
+              image: "/images/bottle.webp",
               claimType: ClaimType.PARTIAL,
               price: 5,
             },
@@ -123,12 +127,14 @@ async function main() {
               title: "ClaimType(Multiple) no claims",
               description:
                 "a wishlist item that is claimable by multiple people, i.e. something unspecific like books",
+              image: "/images/bottle.webp",
               claimType: ClaimType.MULTIPLE,
             },
             {
               title: "ClaimType(Multiple) with claims",
               description:
                 "a wishlist item that is claimable by multiple people, i.e. something unspecific like books",
+              image: "/images/bottle.webp",
               claimType: ClaimType.MULTIPLE,
               claims: {
                 create: [
@@ -143,6 +149,7 @@ async function main() {
               title: "ClaimType(Donate) no donations",
               description:
                 "a wishlist item that is so big that people can pitch in with a bit of cash to the total pot",
+              image: "/images/bottle.webp",
               claimType: ClaimType.DONATE,
               price: 1,
             },
@@ -150,6 +157,7 @@ async function main() {
               title: "ClaimType(Donate) has donations",
               description:
                 "a wishlist item that is so big that people can pitch in with a bit of cash to the total pot",
+              image: "/images/bottle.webp",
               claimType: ClaimType.DONATE,
               price: 5000,
               claims: {
