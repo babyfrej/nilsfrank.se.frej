@@ -6,8 +6,8 @@
     "dotenvx": "dotenvx",
     "postinstall": "prisma generate",
     "dev": "dotenvx run --convention=nextjs -- next dev -p 80",
-    "build": "dotenvx run -f .env.production -- next build",
-    "start": "dotenvx run -f .env.production -- next start",
+    "build": "dotenvx run --convention=nextjs -- next build",
+    "start": "dotenvx run --convention=nextjs -- next start",
     "lint": "next lint"
   },
   "dependencies": {
