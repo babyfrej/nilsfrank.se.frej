@@ -7,6 +7,7 @@ const globalPrisma = global as unknown as {
 };
 
 let prisma: PrismaClient;
+console.log("weeeooop", process.env.APP_ENV, process.env.TURSO_DATABASE_URL);
 if (process.env.APP_ENV === "production") {
   const libsql = createClient({
     url: `${process.env.TURSO_DATABASE_URL}`,

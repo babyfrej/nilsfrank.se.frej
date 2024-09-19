@@ -3,7 +3,7 @@ import z from "zod";
 const envSchema = z.object({
   APP_ENV: z.enum(["development", "test", "production"]).default("development"),
   DATABASE_URL: z.string(),
-  TURSO_DATABASE_AUTH: z.string(),
+  TURSO_DATABASE_URL: z.string(),
   TURSO_AUTH_TOKEN: z.string(),
   EVENT_ID: z.string().default(""),
 
