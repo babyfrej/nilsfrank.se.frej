@@ -1,7 +1,6 @@
 import { ClaimType } from "../src/types/claim-type";
-import createClient from "@/lib/prisma.production";
+import prisma from "@/lib/prisma";
 
-const prisma = createClient();
 async function main() {
   try {
     console.log("Start seeding ...");
