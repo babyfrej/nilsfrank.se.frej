@@ -16,7 +16,11 @@ if (process.env.APP_ENV === "production") {
   prisma = new PrismaClient({ adapter });
 } else {
   if (!globalPrisma.prisma) {
-    globalPrisma.prisma = new PrismaClient();
+    const libsql = createClient({
+      url: process.env.DATABASE_URL,
+    });
+    const adapter = new PrismaLibSQL(libsql);
+    globalPrisma.prisma = new PrismaClient({ adapter });
   }
   prisma = globalPrisma.prisma;
 }
