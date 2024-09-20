@@ -4,23 +4,23 @@ import { Markdown } from "./markdown";
 import { Modal } from "./modal";
 import { WishlistClaims } from "./wishlist-claim-form";
 import type { WishlistItem } from "./wishlist";
-import styles from "./wishlist.module.css";
 import * as css from "./wishlist.css";
 import { isAvailable, isHeroClaimable } from "./wishlist-utils";
 import { ClaimType } from "@/types/claim-type";
+import clsx from "clsx";
 
 export function WishlistHero({ item }: { item: WishlistItem }) {
   let elTitle = <h3 className="text align-center">{item.title}</h3>;
   let elImage = item.image && (
-    <div className={styles.imageWrapper}>
+    <div className={clsx(css.stack, css.imageWrapper)}>
       <Image
         src={item.image}
-        alt="photo of a storage furniture for children"
+        alt={`${item.description}`}
         sizes="(max-width: 668px) 100vw, 668px"
         fill
-        style={{ objectFit: "cover", borderRadius: "inherit" }}
+        style={{ zIndex: -1, objectFit: "cover", borderRadius: "inherit" }}
       />
-      {!isAvailable(item) && <span>Bokad</span>}
+      {!isAvailable(item) && <span className={css.badge}>Bokad</span>}
     </div>
   );
   if (item.href) {
@@ -32,11 +32,17 @@ export function WishlistHero({ item }: { item: WishlistItem }) {
       {elTitle}
       {elImage}
       {item.description && <Markdown content={item.description} />}
-      {isHeroClaimable(item) && (
+      {!isHeroClaimable(item) ? null : (
         <div className={css.collect}>
-          <Modal trigger={<button>{buttonText(item)}</button>}>
-            <WishlistClaims item={item} />
-          </Modal>
+          {!isAvailable(item) ? (
+            <div className="reset">Den här är nu bokad</div>
+          ) : (
+            <div className={css.collect}>
+              <Modal trigger={<button>{buttonText(item)}</button>}>
+                <WishlistClaims item={item} />
+              </Modal>
+            </div>
+          )}
         </div>
       )}
     </article>
