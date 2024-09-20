@@ -13,6 +13,7 @@ export const isHeroClaimable = (item: WishlistItem) => {
       return false;
   }
 };
+
 export const isAvailable = (item: WishlistItem) => {
   switch (item.claimType) {
     case ClaimType.FULL:

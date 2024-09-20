@@ -6,7 +6,7 @@ import { WishlistClaims } from "./wishlist-claim-form";
 import type { WishlistItem } from "./wishlist";
 import styles from "./wishlist.module.css";
 import * as css from "./wishlist.css";
-import { isHeroClaimable } from "./wishlist-utils";
+import { isAvailable, isHeroClaimable } from "./wishlist-utils";
 import { ClaimType } from "@/types/claim-type";
 
 export function WishlistHero({ item }: { item: WishlistItem }) {
@@ -20,6 +20,7 @@ export function WishlistHero({ item }: { item: WishlistItem }) {
         fill
         style={{ objectFit: "cover", borderRadius: "inherit" }}
       />
+      {!isAvailable(item) && <span>Bokad</span>}
     </div>
   );
   if (item.href) {
