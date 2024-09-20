@@ -3,6 +3,7 @@ import { Giraffe } from "@/components/giraffe";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import local from "next/font/local";
+import Image from "next/image";
 import "../lib/env";
 import "./globals.css";
 import clsx from "clsx";
@@ -69,7 +70,7 @@ export default function RootLayout({
     >
       <body>
         {children}
-        <footer>
+        <footer style={{ position: "relative" }}>
           <div
             className="main"
             style={{
@@ -81,6 +82,16 @@ export default function RootLayout({
               color: "color-mix(in lab, var(--bg-body), white 80%)",
             }}
           >
+            <Image
+              style={{
+                position: "absolute",
+                transform: "translate(-140px, -279px)",
+              }}
+              src="/images/bluey_dancing.webp"
+              alt="Bluey Heeler dancing"
+              width="103"
+              height="120"
+            />
             <Giraffe />
 
             <div className="with-love">
