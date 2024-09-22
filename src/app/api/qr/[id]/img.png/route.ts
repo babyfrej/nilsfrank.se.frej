@@ -48,15 +48,11 @@ export async function GET(
     return new Response("Contact Not Found", { status: 500 });
   }
 
-  const body = {
+  const body: SwishBodyRequest = {
     format: "png",
     payee: {
       value: contact.phone,
       editable: false,
-    },
-    amount: {
-      value: item.price ?? 200,
-      editable: true,
     },
     message: {
       value: item.title
@@ -66,8 +62,10 @@ export async function GET(
     },
     size: 400,
     border: 1,
-  } satisfies SwishBodyRequest;
-
+  };
+  if (item.price) {
+    body.amount = { value: item.price, editable: true };
+  }
   const qr = await fetch(
     "https://mpc.getswish.net/qrg-swish/api/v1/prefilled",
     {
