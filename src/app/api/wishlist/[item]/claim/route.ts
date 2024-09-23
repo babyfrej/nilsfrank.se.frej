@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import { cookies } from "next/headers";
+import { revalidatePath } from "next/cache";
 import { NextResponse, type NextRequest } from "next/server";
 import { z } from "zod";
 
@@ -43,12 +44,14 @@ export async function POST(
     );
   }
 
-  console.log("WOOOOOOOP", process.env.NEXT_PUBLIC_COOKIE_CODE);
   cookies().set(process.env.NEXT_PUBLIC_COOKIE_CODE, inputs.email, {
     expires: new Date("2024-10-25"),
     sameSite: "strict",
     path: "/",
   });
+
+  revalidatePath("/");
+
   return NextResponse.json(null, {
     status: 201,
   });
@@ -80,5 +83,8 @@ export async function DELETE(
       { status: 500 },
     );
   }
+
+  revalidatePath("/");
+
   return NextResponse.json(null, { status: 200 });
 }
