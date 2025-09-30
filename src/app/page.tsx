@@ -10,6 +10,8 @@ import {
   BlueyTitleCardDescription,
   BlueyTitleCardTitle,
 } from "@/components/bluey/title-card";
+import * as css from "./page.css";
+import clsx from "clsx";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -91,7 +93,7 @@ export default async function Page() {
     <main>
       <article>
         {event?.details?.name && (
-          <section style={{ paddingInline: "0" }}>
+          <section className={css.section}>
             <BlueyTitleCard>
               <BlueyTitleCardTitle>{event?.details?.name}</BlueyTitleCardTitle>
               {event?.details?.description && (
@@ -127,12 +129,7 @@ export default async function Page() {
                     <div className="slot-time">
                       <h2>{format(slot.start, "yyyy-MM-dd")}</h2>
                       <p
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-around",
-                          flexWrap: "nowrap",
-                        }}
-                        className="text"
+                        className={clsx(css.timeslotParagraph, "text")}
                       >
                         <span className="media">
                           <Clock /> {format(slot.start, "HH:mm")} -{" "}

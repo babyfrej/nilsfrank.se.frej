@@ -7,6 +7,8 @@ import Image from "next/image";
 import "../lib/env";
 import "./globals.css";
 import clsx from "clsx";
+import type { ReactNode } from "react";
+import styles from "./layout.module.css"
 
 const fontPrimary = Montserrat({
   subsets: ["latin"],
@@ -61,7 +63,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <html
@@ -70,23 +72,12 @@ export default function RootLayout({
     >
       <body>
         {children}
-        <footer style={{ position: "relative" }}>
+        <footer className={styles.footer}>
           <div
-            className="main"
-            style={{
-              height: "300px",
-              padding: "2rem",
-              display: "flex",
-              gap: "1rem",
-              alignItems: "end",
-              color: "color-mix(in lab, var(--bg-body), white 80%)",
-            }}
+            className={clsx(styles.main, "main")}
           >
             <Image
-              style={{
-                position: "absolute",
-                transform: "translate(-140px, -279px)",
-              }}
+              className={styles.blueyDancing}
               src="/images/bluey_dancing.webp"
               alt="Bluey Heeler dancing"
               width="103"
@@ -94,7 +85,7 @@ export default function RootLayout({
             />
             <Giraffe />
 
-            <div className="with-love">
+            <div className={styles.withLove}>
               <h3>nilsfrank.se</h3>
               <span>Made with ❤️ by Niklas Frank</span>
             </div>

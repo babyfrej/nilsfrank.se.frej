@@ -14,11 +14,11 @@ export function WishlistHero({ item }: { item: WishlistItem }) {
   let elImage = item.image && (
     <div className={clsx(css.stack, css.imageWrapper)}>
       <Image
+      className={css.image}
         src={item.image}
         alt={`${item.description}`}
         sizes="(max-width: 668px) 100vw, 668px"
         fill
-        style={{ zIndex: -1, objectFit: "cover", borderRadius: "inherit" }}
       />
       {!isAvailable(item) && <span className={css.badge}>Bokad</span>}
     </div>
@@ -28,7 +28,7 @@ export function WishlistHero({ item }: { item: WishlistItem }) {
     elImage = item.image && <Link href={item.href}>{elImage}</Link>;
   }
   return (
-    <article style={{ paddingBottom: "4rem" }}>
+    <article className={css.wrapper}>
       {elTitle}
       {elImage}
       {item.description && <Markdown content={item.description} />}

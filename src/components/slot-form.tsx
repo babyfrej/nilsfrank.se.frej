@@ -86,10 +86,10 @@ export function SlotForm({ slot, guest }: Props) {
     <form onSubmit={handleSubmit(onSubmit)}>
       <input type="hidden" {...register("reservationId")} />
       <div>
-        <h2 className="text align-center" style={{ color: "inherit" }}>
+        <h2 className="text align-center color-inherit">
           {slot.start && format(slot.start, "yyyy-MM-dd")}
         </h2>
-        <p style={{ display: "flex", alignItems: "center" }}>
+        <p className="flex align-center">
           <Clock />
           <span>
             {slot.start && format(slot.start, "HH:mm")}
@@ -110,17 +110,17 @@ export function SlotForm({ slot, guest }: Props) {
             <input type="text" {...register("name")} />
           </label>
         </div>
-        <div style={{ display: "flex", gap: "2rem" }}>
-          <label htmlFor="adults" style={{ flex: "1" }}>
+        <div className="flex gap-2">
+          <label htmlFor="adults" className="flex-1">
             <span>Vuxna</span>
-            <input type="number" {...register("adults")} />
+            <input type="number" {...register("adults")} id="adults" />
             {errors.adults?.message && (
               <span className="text sm">{errors.adults.message}</span>
             )}
           </label>
-          <label htmlFor="children" style={{ flex: "1" }}>
+          <label htmlFor="children" className="flex-1">
             <span>Barn</span>
-            <input type="number" {...register("children")} />
+            <input type="number" {...register("children")} id="children" />
             {errors.children?.message && (
               <span className="text sm">{errors.children.message}</span>
             )}
@@ -136,7 +136,7 @@ export function SlotForm({ slot, guest }: Props) {
             />
           </label>
         </div>
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <div className="flex justify-end">
           {guest?.attending && (
             <button type="button" className="reset" onClick={onDelete}>
               Ta bort

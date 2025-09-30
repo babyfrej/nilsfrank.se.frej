@@ -1,5 +1,8 @@
 import { style, globalStyle } from "@vanilla-extract/css";
 
+export const wrapper = style({
+  paddingBottom: "4rem",
+})
 export const content = style({
   display: "grid",
   gap: "2rem",
@@ -85,6 +88,11 @@ export const imageWrapper = style({
   border: "1px solid color-mix(in lab, var(--bg-body) 74%, white)",
   borderBlockEnd: "none",
   boxShadow: "0 0 var(--shadow-size) rgba(0, 0, 0, 0.220)",
+});
+export const image = style({
+  zIndex: -1,
+  objectFit: "cover",
+  borderRadius: "inherit",
 });
 
 export const badge = style({

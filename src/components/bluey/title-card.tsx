@@ -6,40 +6,32 @@ import { OrangeCandy } from "./orange-candy";
 import { YellowCandy } from "./yellow-candy";
 import { PurpleCandy } from "./purple-candy";
 import { Gum } from "./gum";
-import {
-  candyBag,
-  candyShadow,
-  titleCardContainer,
-  titleCardTitle,
-} from "./styles.css";
+import * as css from "./styles.css";
+import clsx from "clsx";
 
 export function BlueyTitleCard({ children }: PropsWithChildren) {
   return (
-    <div className={titleCardContainer}>
-      <div className={candyBag}>
-        <Bag className={candyShadow} style={{ width: "200px" }} />
+    <div className={css.titleCardContainer}>
+      <div className={css.candyBagWrapper}>
+        <Bag className={clsx(css.candyBag, css.candyShadow)} />
         <PurpleCandy
-          className={candyShadow}
-          style={{
-            width: "60px",
-            translate: "-70px 70px",
-          }}
+          className={clsx(css.purpleCandy, css.candyShadow)}
         />
         <Gum
-          className={candyShadow}
-          style={{ width: "40px", translate: "-50px 80px" }}
+          className={clsx(css.gum, css.candyShadow)}
+          
         />
         <OrangeCandy
-          className={candyShadow}
-          style={{ width: "60px", translate: "70px 70px" }}
+          className={clsx(css.orangeCandy, css.candyShadow)}
+          
         />
         <Lolipop
-          className={candyShadow}
-          style={{ width: "70px", translate: "-6px 70px" }}
+          className={clsx(css.lolipop, css.candyShadow)}
+          
         />
         <YellowCandy
-          className={candyShadow}
-          style={{ width: "60px", translate: "98px 80px" }}
+          className={clsx(css.yellowCandy, css.candyShadow)}
+          
         />
       </div>
       {children}
@@ -48,7 +40,7 @@ export function BlueyTitleCard({ children }: PropsWithChildren) {
 }
 
 export function BlueyTitleCardTitle({ children }: PropsWithChildren) {
-  return <h1 className={titleCardTitle}>{children}</h1>;
+  return <h1 className={css.titleCardTitle}>{children}</h1>;
 }
 
 export function BlueyTitleCardDescription({

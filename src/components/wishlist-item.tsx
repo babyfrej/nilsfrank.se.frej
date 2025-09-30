@@ -6,9 +6,9 @@ import type { WishlistItem } from "./wishlist";
 import { WishlistClaims } from "./wishlist-claim-form";
 import * as css from "./wishlist-item.css";
 import { hsla } from "@/utils/hsla";
-import { assignInlineVars } from "@vanilla-extract/dynamic";
 import { ClaimType } from "@/types/claim-type";
 import { isAvailable } from "./wishlist-utils";
+import { WishlistItemDot } from "./wishlist-item-dot";
 
 type WishlistItemProps = {
   item: WishlistItem;
@@ -45,11 +45,7 @@ export function WishlistItem({
                   { saturation: 80, lightness: 76, alpha: 1 },
                   item.claims.length,
                 ).map((c) => (
-                  <div
-                    key={c}
-                    className={css.dot}
-                    style={assignInlineVars({ [css.dotColorVar]: c })}
-                  />
+                  <WishlistItemDot key={c} color={c} />
                 ))}
               </div>
             )}

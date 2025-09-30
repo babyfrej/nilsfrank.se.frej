@@ -39,6 +39,19 @@
   place-items: center;
 }
 
+.claim {
+  display: grid;
+  margin-block-end: 1rem;
+}
+a.swish {
+  --text: var(--clr-text);
+  place-self: center;
+  padding: 0.2rem 1rem;
+  border: 1px solid currentColor;
+  border-radius: 1rem;
+  text-align: center;
+}
+
 .imageWrapper {
   --shadow-size: 1rem;
   width: 80%;

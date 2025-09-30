@@ -193,7 +193,7 @@ function ClaimRange({ item: { price } }: WishlistClaimsProps) {
 
 export function ClaimDonate({ item: { id, title } }: WishlistClaimsProps) {
   return (
-    <div style={{ display: "grid", marginBlockEnd: "1rem" }}>
+    <div className={styles.claim}>
       <h2 className="text align-center">{title}</h2>
       <div className={qrWrapper}>
         <Image
@@ -205,15 +205,7 @@ export function ClaimDonate({ item: { id, title } }: WishlistClaimsProps) {
         />
       </div>
       <Link
-        className="text sm"
-        style={{
-          color: "var(--clr-text)",
-          placeSelf: "center",
-          padding: "0.2rem 1rem",
-          border: "1px solid currentColor",
-          borderRadius: "1rem",
-          textAlign: "center",
-        }}
+        className={clsx("text sm", styles.swish)}
         href={`swish://`}
       >
         Öppna Swish

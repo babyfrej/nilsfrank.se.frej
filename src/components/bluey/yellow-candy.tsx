@@ -1,3 +1,4 @@
+"use client";
 import type { SvgProps } from "./types";
 
 export const YellowCandy = ({ style, ...props }: SvgProps) => (

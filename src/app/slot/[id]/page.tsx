@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma";
 import { cookies } from "next/headers";
 import Image from "next/image";
 import { redirect } from "next/navigation";
+import * as css from "./page.css";
 
 export default async function Page({
   params: { id },
@@ -43,12 +44,7 @@ export default async function Page({
     <main>
       <article>
         <div
-          style={{
-            aspectRatio: "16/9",
-            position: "relative",
-            objectFit: "cover",
-            marginBlockEnd: "2rem",
-          }}
+          className={css.imageContainer}
         >
           <Image
             src="/images/teddy_party.webp"
