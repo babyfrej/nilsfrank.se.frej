@@ -1,5 +1,4 @@
-
-.main  {
+.main {
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: 16rem 5rem auto 20vh;
@@ -7,7 +6,9 @@
   min-height: 100vh;
   margin-inline: auto;
   border-inline: 1px dashed;
-  border-color: hsl(var(--bg-body-h) var(--bg-body-s) calc(var(--bg-body-l) - 30%) / 0.5);
+  border-color: hsl(
+    var(--bg-body-h) var(--bg-body-s) calc(var(--bg-body-l) - 30%) / 0.5
+  );
 }
 
 .main .header {
@@ -20,7 +21,6 @@
 .main .header img {
   object-fit: cover;
 }
-
 
 .main .section {
   grid-column: 1;
@@ -51,7 +51,7 @@
   color: black;
   place-items: center;
   background-color: color-mix(in lab, var(--bg-body) 50%, deeppink);
-  box-shadow: 0px 0px 16px 8px rgba(0,0,0,0.5);
+  box-shadow: 0px 0px 16px 8px rgba(0, 0, 0, 0.5);
   aspect-ratio: 1;
   border-radius: 6rem;
   margin-block-end: 2rem;

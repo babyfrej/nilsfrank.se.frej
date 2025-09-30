@@ -8,7 +8,7 @@ import "../lib/env";
 import "./globals.css";
 import clsx from "clsx";
 import type { ReactNode } from "react";
-import styles from "./layout.module.css"
+import styles from "./layout.module.css";
 
 const fontPrimary = Montserrat({
   subsets: ["latin"],
@@ -60,11 +60,7 @@ export const metadata: Metadata = {
     },
   },
 };
-export default function RootLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="sv"
@@ -73,9 +69,7 @@ export default function RootLayout({
       <body>
         {children}
         <footer className={styles.footer}>
-          <div
-            className={clsx(styles.main, "main")}
-          >
+          <div className={clsx(styles.main, "main")}>
             <Image
               className={styles.blueyDancing}
               src="/images/bluey_dancing.webp"

@@ -14,25 +14,11 @@ export function BlueyTitleCard({ children }: PropsWithChildren) {
     <div className={css.titleCardContainer}>
       <div className={css.candyBagWrapper}>
         <Bag className={clsx(css.candyBag, css.candyShadow)} />
-        <PurpleCandy
-          className={clsx(css.purpleCandy, css.candyShadow)}
-        />
-        <Gum
-          className={clsx(css.gum, css.candyShadow)}
-          
-        />
-        <OrangeCandy
-          className={clsx(css.orangeCandy, css.candyShadow)}
-          
-        />
-        <Lolipop
-          className={clsx(css.lolipop, css.candyShadow)}
-          
-        />
-        <YellowCandy
-          className={clsx(css.yellowCandy, css.candyShadow)}
-          
-        />
+        <PurpleCandy className={clsx(css.purpleCandy, css.candyShadow)} />
+        <Gum className={clsx(css.gum, css.candyShadow)} />
+        <OrangeCandy className={clsx(css.orangeCandy, css.candyShadow)} />
+        <Lolipop className={clsx(css.lolipop, css.candyShadow)} />
+        <YellowCandy className={clsx(css.yellowCandy, css.candyShadow)} />
       </div>
       {children}
     </div>

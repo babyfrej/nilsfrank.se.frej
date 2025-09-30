@@ -43,9 +43,7 @@ export default async function Page({
   return (
     <main>
       <article>
-        <div
-          className={css.imageContainer}
-        >
+        <div className={css.imageContainer}>
           <Image
             src="/images/teddy_party.webp"
             alt="illsutration of a teddybear throwing a party"

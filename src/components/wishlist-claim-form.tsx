@@ -204,10 +204,7 @@ export function ClaimDonate({ item: { id, title } }: WishlistClaimsProps) {
           fill
         />
       </div>
-      <Link
-        className={clsx("text sm", styles.swish)}
-        href={`swish://`}
-      >
+      <Link className={clsx("text sm", styles.swish)} href={`swish://`}>
         Öppna Swish
       </Link>
     </div>

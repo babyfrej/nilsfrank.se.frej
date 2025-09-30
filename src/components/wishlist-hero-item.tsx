@@ -14,7 +14,7 @@ export function WishlistHero({ item }: { item: WishlistItem }) {
   let elImage = item.image && (
     <div className={clsx(css.stack, css.imageWrapper)}>
       <Image
-      className={css.image}
+        className={css.image}
         src={item.image}
         alt={`${item.description}`}
         sizes="(max-width: 668px) 100vw, 668px"

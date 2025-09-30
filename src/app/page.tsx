@@ -90,7 +90,7 @@ export default async function Page() {
     }),
   ]);
 
-  if(!event) {
+  if (!event) {
     return notFound();
   }
 
@@ -133,9 +133,7 @@ export default async function Page() {
                   >
                     <div className="slot-time">
                       <h2>{format(slot.start, "yyyy-MM-dd")}</h2>
-                      <p
-                        className={clsx(css.timeslotParagraph, "text")}
-                      >
+                      <p className={clsx(css.timeslotParagraph, "text")}>
                         <span className="media">
                           <Clock /> {format(slot.start, "HH:mm")} -{" "}
                           {format(slot.end, "HH:mm")}
@@ -154,16 +152,19 @@ export default async function Page() {
                 ))}
             </div>
           </div>
-          {event.slots.length > 1 && (<div className="text md info">
-            <p>
-              p.g.a. platsbrist har vi behövt dela upp kalaset på två dagar. Vi
-              hoppas att ni kan komma på en av dagarna. Om ni inte kan komma på
-              någon av dagarna, eller om ni har några frågor, kontakta {event.details?.contact?.name} på{" "}
-              <a href={`tel:${event.details?.contact?.phone}`}>
-                {event.details?.contact?.phone}
-              </a>
-            </p>
-          </div>)}
+          {event.slots.length > 1 && (
+            <div className="text md info">
+              <p>
+                p.g.a. platsbrist har vi behövt dela upp kalaset på två dagar.
+                Vi hoppas att ni kan komma på en av dagarna. Om ni inte kan
+                komma på någon av dagarna, eller om ni har några frågor,
+                kontakta {event.details?.contact?.name} på{" "}
+                <a href={`tel:${event.details?.contact?.phone}`}>
+                  {event.details?.contact?.phone}
+                </a>
+              </p>
+            </div>
+          )}
         </section>
         <section>
           <WishlistHeader>

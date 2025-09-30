@@ -1,3 +1,3 @@
-import {style} from "@vanilla-extract/css";
+import { style } from "@vanilla-extract/css";
 
-export const giraffe = style({fill: "currentColor"});
+export const giraffe = style({ fill: "currentColor" });

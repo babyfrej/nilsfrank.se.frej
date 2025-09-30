@@ -2,7 +2,7 @@ import { style, globalStyle } from "@vanilla-extract/css";
 
 export const wrapper = style({
   paddingBottom: "4rem",
-})
+});
 export const content = style({
   display: "grid",
   gap: "2rem",
