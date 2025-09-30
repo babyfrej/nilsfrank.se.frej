@@ -17,7 +17,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-  themeColor: "hsl(15, 71%, 79%)",
+  themeColor: "hsl(204, 95%, 91%)",
 };
 
 export default async function Page() {
