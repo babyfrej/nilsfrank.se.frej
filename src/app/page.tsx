@@ -12,6 +12,7 @@ import {
 } from "@/components/bluey/title-card";
 import * as css from "./page.css";
 import clsx from "clsx";
+import { notFound } from "next/navigation";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -89,14 +90,18 @@ export default async function Page() {
     }),
   ]);
 
+  if(!event) {
+    return notFound();
+  }
+
   return (
     <main>
       <article>
-        {event?.details?.name && (
+        {event.details?.name && (
           <section className={css.section}>
             <BlueyTitleCard>
-              <BlueyTitleCardTitle>{event?.details?.name}</BlueyTitleCardTitle>
-              {event?.details?.description && (
+              <BlueyTitleCardTitle>{event.details?.name}</BlueyTitleCardTitle>
+              {event.details?.description && (
                 <BlueyTitleCardDescription
                   description={event.details?.description}
                 />
@@ -110,7 +115,7 @@ export default async function Page() {
               <Location />
               <span>Var</span>
             </h2>
-            <h1>{event?.details?.location}</h1>
+            <h1>{event.details?.location}</h1>
           </div>
           <div>
             <h2 className="media subheading text info">
@@ -118,7 +123,7 @@ export default async function Page() {
               <span>När</span>
             </h2>
             <div className="slots">
-              {event?.slots
+              {event.slots
                 .sort((a, b) => a.start.getTime() - b.start.getTime())
                 .map((slot) => (
                   <Link
@@ -149,16 +154,16 @@ export default async function Page() {
                 ))}
             </div>
           </div>
-          <div className="text md info">
+          {event.slots.length > 1 && (<div className="text md info">
             <p>
               p.g.a. platsbrist har vi behövt dela upp kalaset på två dagar. Vi
               hoppas att ni kan komma på en av dagarna. Om ni inte kan komma på
               någon av dagarna, eller om ni har några frågor, kontakta Niklas på{" "}
-              <a href={`tel:${event?.details?.contact?.phone}`}>
-                {event?.details?.contact?.phone}
+              <a href={`tel:${event.details?.contact?.phone}`}>
+                {event.details?.contact?.phone}
               </a>
             </p>
-          </div>
+          </div>)}
         </section>
         <section>
           <WishlistHeader>
