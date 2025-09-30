@@ -158,7 +158,7 @@ export default async function Page() {
             <p>
               p.g.a. platsbrist har vi behövt dela upp kalaset på två dagar. Vi
               hoppas att ni kan komma på en av dagarna. Om ni inte kan komma på
-              någon av dagarna, eller om ni har några frågor, kontakta Niklas på{" "}
+              någon av dagarna, eller om ni har några frågor, kontakta {event.details?.contact?.name} på{" "}
               <a href={`tel:${event.details?.contact?.phone}`}>
                 {event.details?.contact?.phone}
               </a>
