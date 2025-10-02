@@ -166,17 +166,19 @@ export default async function Page() {
             </div>
           )}
         </section>
-        <section>
-          <WishlistHeader>
-            {hero.map((hero) => (
-              <WishlistHero key={hero.id} item={hero} />
-            ))}
-            {Array.isArray(list) && Array.isArray(hero) && (
-              <p>Annars finns här lite inspirerande idéer</p>
-            )}
-            {Array.isArray(list) && <Wishlist list={list} />}
-          </WishlistHeader>
-        </section>
+        {(Array.isArray(list) || Array.isArray(hero)) && (
+          <section>
+            <WishlistHeader>
+              {hero.map((hero) => (
+                <WishlistHero key={hero.id} item={hero} />
+              ))}
+              {Array.isArray(list) && Array.isArray(hero) && (
+                <p>Annars finns här lite inspirerande idéer</p>
+              )}
+              {Array.isArray(list) && <Wishlist list={list} />}
+            </WishlistHeader>
+          </section>
+        )}
       </article>
     </main>
   );
