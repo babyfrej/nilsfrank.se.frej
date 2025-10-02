@@ -166,7 +166,7 @@ export default async function Page() {
             </div>
           )}
         </section>
-        {(Array.isArray(list) || Array.isArray(hero)) && (
+        {(isEmpty(list) || isEmpty(hero)) && (
           <section>
             <WishlistHeader>
               {hero.map((hero) => (
@@ -183,3 +183,5 @@ export default async function Page() {
     </main>
   );
 }
+
+const isEmpty = (arr: unknown[]) => arr.length <= 0;
