@@ -25,8 +25,10 @@ export async function POST(req: NextRequest) {
       create: reservation,
       update: reservation,
       where: {
-        email: inputs.data.email,
-        reservationId: inputs.data.reservationId,
+        email_reservationId: {
+          email: inputs.data.email,
+          reservationId: inputs.data.reservationId,
+        },
       },
     });
   } catch (e) {
@@ -65,7 +67,12 @@ export async function DELETE(req: NextRequest) {
   }
   try {
     await prisma.guests.update({
-      where: { email, reservationId: inputs.data.reservationId },
+      where: {
+        email_reservationId: {
+          email,
+          reservationId: inputs.data.reservationId,
+        },
+      },
       data: { attending: false, deletedAt: new Date() },
     });
   } catch (e) {
