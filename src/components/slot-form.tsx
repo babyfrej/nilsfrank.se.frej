@@ -68,8 +68,13 @@ export function SlotForm({ slot, guest }: Props) {
     await fetch(`/api/slot`, {
       method: "POST",
       body: JSON.stringify(formData),
-    });
-    router.push(`/slot/success`);
+    })
+      .then(() => {
+        router.push(`/slot/success`);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
   const deleteFields = watch(["email", "reservationId"]);
