@@ -38,7 +38,6 @@ export async function POST(req: NextRequest) {
 
   revalidatePath("/");
   cookies().set(process.env.NEXT_PUBLIC_COOKIE_CODE, inputs.data.email, {
-    expires: new Date("2023-10-15"),
     sameSite: "strict",
     path: "/",
   });

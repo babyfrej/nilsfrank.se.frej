@@ -56,7 +56,7 @@ model EventContact {
 }
 
 model Guests {
-  email     String  @id @unique
+  email     String
   name      String
   attending Boolean
   adults    Int
@@ -69,6 +69,8 @@ model Guests {
 
   reservationId String
   reservation   EventSlot @relation(fields: [reservationId], references: [id])
+
+  @@id([email, reservationId])
 }
 
 model Wishlist {
