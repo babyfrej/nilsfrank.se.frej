@@ -166,7 +166,7 @@ export default async function Page() {
             </div>
           )}
         </section>
-        {(isEmpty(list) || isEmpty(hero)) && (
+        {(!isEmpty(list) || !isEmpty(hero)) && (
           <section>
             <WishlistHeader>
               {hero.map((hero) => (
