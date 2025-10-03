@@ -5,11 +5,8 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 import * as css from "./page.css";
 
-export default async function Page({
-  params: { id },
-}: {
-  params: { id: string };
-}) {
+export default async function Page(props: PageProps<"/slot/[id]">) {
+  const { id } = await props.params;
   const email = (await cookies()).get(
     process.env.NEXT_PUBLIC_COOKIE_CODE,
   )?.value;
