@@ -185,7 +185,8 @@ async function main() {
       },
     });
     console.log("Seeding finished. New Event ID", event.id);
-    $`dotenvx set -f .env.development ${event.id}`;
+    const x = await $`dotenvx set EVENT_ID ${event.id} -f .env.development`;
+    console.log(x);
   } catch (error) {
     console.error(error);
     process.exit(1);
