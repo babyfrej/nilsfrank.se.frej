@@ -38,13 +38,14 @@ export async function POST(
       },
     });
   } catch (e) {
+    console.log(e);
     return NextResponse.json(
       { "root.server": "Något gick fel" },
       { status: 500 },
     );
   }
 
-  cookies().set(process.env.NEXT_PUBLIC_COOKIE_CODE, inputs.email, {
+  (await cookies()).set(process.env.NEXT_PUBLIC_COOKIE_CODE, inputs.email, {
     expires: new Date("2024-10-25"),
     sameSite: "strict",
     path: "/",
@@ -78,6 +79,7 @@ export async function DELETE(
       },
     });
   } catch (e) {
+    console.log(e);
     return NextResponse.json(
       { "root.server": "Något gick fel" },
       { status: 500 },

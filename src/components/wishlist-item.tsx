@@ -63,7 +63,7 @@ export function WishlistItem({
                       </button>
                     );
                   default:
-                    null;
+                    return null;
                 }
               })()
             )}

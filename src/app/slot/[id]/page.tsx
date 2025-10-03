@@ -10,7 +10,9 @@ export default async function Page({
 }: {
   params: { id: string };
 }) {
-  const email = cookies().get(process.env.NEXT_PUBLIC_COOKIE_CODE)?.value;
+  const email = (await cookies()).get(
+    process.env.NEXT_PUBLIC_COOKIE_CODE,
+  )?.value;
   const data = await prisma.eventSlot.findFirst({
     where: { id },
     select: {

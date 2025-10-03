@@ -122,7 +122,7 @@ export function WishlistClaims({
   }
 }
 
-function ClaimFull({ item: { id, title } }: WishlistClaimsProps) {
+function ClaimFull(_: WishlistClaimsProps) {
   const ariaId = useId();
   const {
     register,
@@ -149,7 +149,7 @@ function ClaimFull({ item: { id, title } }: WishlistClaimsProps) {
     </div>
   );
 }
-function ClaimMultiple({ item: { id, title } }: WishlistClaimsProps) {
+function ClaimMultiple({ item: { title } }: WishlistClaimsProps) {
   const ariaId = useId();
   const {
     register,

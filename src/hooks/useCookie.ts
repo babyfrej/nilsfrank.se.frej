@@ -5,7 +5,7 @@ import { useSyncExternalStore } from "react";
 const listeners = new Set<() => void>();
 const cookieStore = {
   get: (key: string) => Cookies.get(key),
-  set: (key: string, value: string, options: CookieAttributes) =>
+  set: (key: string, value: string, _options: CookieAttributes) =>
     Cookies.set(key, value),
   subscribe: (callback: () => void): (() => void) => {
     listeners.add(callback);
