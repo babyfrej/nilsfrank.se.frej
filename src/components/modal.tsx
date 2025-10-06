@@ -12,7 +12,7 @@ import {
   type ElementRef,
   useState,
 } from "react";
-import { dialog, scolldisable } from "./modal.css";
+import { dialog } from "./modal.css";
 
 const modalCtx = createContext<{ open: () => void; close: () => void } | null>(
   null,
@@ -39,12 +39,10 @@ export function Modal({
     const close = () => {
       setOpen(false);
       ref.current!.close();
-      document.body.classList.remove(scolldisable);
     };
     const open = () => {
       setOpen(true);
       ref.current!.showModal();
-      document.body.classList.add(scolldisable);
     };
     return { open, close };
   }, []);

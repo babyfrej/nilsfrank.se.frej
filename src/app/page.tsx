@@ -128,7 +128,7 @@ export default async function Page() {
                 .map((slot) => (
                   <Link
                     key={slot.id}
-                    href={`/slot/${slot.id}`}
+                    href={`/slot/booking/${slot.id}`}
                     className="slot-content text align-center primary"
                   >
                     <div className="slot-time">

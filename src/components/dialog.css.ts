@@ -20,3 +20,8 @@ export const dialog = style({
 });
 
 globalStyle(`${dialog} > *`, { padding: "1rem" });
+
+export const scolldisable = style({
+  height: "auto !important",
+  overflow: "hidden !important",
+});

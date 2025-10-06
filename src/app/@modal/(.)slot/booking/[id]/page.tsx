@@ -1,11 +1,10 @@
 import { SlotForm } from "@/components/slot-form";
 import prisma from "@/lib/prisma";
 import { cookies } from "next/headers";
-import Image from "next/image";
-import { redirect } from "next/navigation";
 import * as css from "./page.css";
+import { Dialog } from "@/components/dialog";
 
-export default async function Page(props: PageProps<"/slot/[id]">) {
+export default async function Page(props: PageProps<"/slot/booking/[id]">) {
   const { id } = await props.params;
   const email = (await cookies()).get(
     process.env.NEXT_PUBLIC_COOKIE_CODE,
@@ -31,30 +30,16 @@ export default async function Page(props: PageProps<"/slot/[id]">) {
   });
 
   if (!data) {
-    redirect("/");
+    return null;
   }
 
   const {
     guests: [guest],
     ...slot
   } = data;
-
   return (
-    <main>
-      <article>
-        <div className={css.imageContainer}>
-          <Image
-            src="/images/teddy_party.webp"
-            alt="illsutration of a teddybear throwing a party"
-            fill
-            sizes="(max-width: 668px) 100vw, 668px"
-            priority
-          />
-        </div>
-        <section>
-          <SlotForm slot={slot} guest={{ email, ...guest }} />
-        </section>
-      </article>
-    </main>
+    <Dialog className={css.dialog}>
+      <SlotForm slot={slot} guest={{ email, ...guest }} />
+    </Dialog>
   );
 }

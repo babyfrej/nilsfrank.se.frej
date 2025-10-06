@@ -7,7 +7,6 @@ import Image from "next/image";
 import "../lib/env";
 import "./globals.css";
 import clsx from "clsx";
-import type { ReactNode } from "react";
 import styles from "./layout.module.css";
 
 const fontPrimary = Montserrat({
@@ -60,13 +59,14 @@ export const metadata: Metadata = {
     },
   },
 };
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children, modal }: LayoutProps<"/">) {
   return (
     <html
       lang="sv"
       className={clsx(fontPrimary.variable, fontTertiary.variable)}
     >
       <body>
+        {modal}
         {children}
         <footer className={styles.footer}>
           <div className={clsx(styles.main, "main")}>
