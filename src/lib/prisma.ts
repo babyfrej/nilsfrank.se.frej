@@ -1,6 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import { createClient } from "@libsql/client";
 import { PrismaLibSQL } from "@prisma/adapter-libsql";
+import assert from "assert";
+import "server-only";
 
 const globalPrisma = global as unknown as {
   prisma: PrismaClient;
@@ -9,6 +11,7 @@ const globalPrisma = global as unknown as {
 let prisma: PrismaClient;
 
 if (process.env.APP_ENV === "production") {
+  assert(process.env.DATABASE_AUTH_TOKEN, "missing auth token");
   const libsql = createClient({
     url: `${process.env.DATABASE_URL}`,
     authToken: `${process.env.DATABASE_AUTH_TOKEN}`,
