@@ -26,8 +26,9 @@ export async function generateStaticParams() {
 
 export async function GET(
   _req: NextRequest,
-  { params: { id } }: { params: { id: string } },
+  { params }: RouteContext<"/api/qr/[id]/img.png">,
 ) {
+  const { id } = await params;
   if (!id) {
     return new Response("Not found", { status: 404 });
   }

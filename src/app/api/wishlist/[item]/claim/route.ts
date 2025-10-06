@@ -13,8 +13,9 @@ const wishlistClaim = z.object({
 
 export async function POST(
   req: NextRequest,
-  { params: { item } }: { params: { item: string } },
+  { params }: RouteContext<"/api/wishlist/[item]/claim">,
 ) {
+  const { item } = await params;
   const json = wishlistClaim.safeParse(await req.json());
   if (!json.success) {
     return NextResponse.json(json.error.errors, { status: 400 });
