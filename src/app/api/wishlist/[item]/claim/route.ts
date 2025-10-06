@@ -61,8 +61,9 @@ export async function POST(
 
 export async function DELETE(
   req: NextRequest,
-  { params: { item } }: { params: { item: string } },
+  { params }: RouteContext<"/api/wishlist/[item]/claim">,
 ) {
+  const { item } = await params;
   const email = req.cookies.get(process.env.NEXT_PUBLIC_COOKIE_CODE)?.value;
   if (!email) {
     return NextResponse.json({ email: "Ingen epost angiven" }, { status: 400 });
