@@ -15,7 +15,7 @@ type SwishBodyRequest = {
 const MESSAGE_ALLOWED_CHARS = /[^a-öA-Ö0-9?!() .,\-:;]/g;
 const MESSAGE_MAX_LENGTH = 50;
 
-export const revalidate = 60 * 60 * 24 * 365;
+export const revalidate = 31_556_926; // a year in seconds
 
 export async function generateStaticParams() {
   return prisma.wishlist.findMany({
