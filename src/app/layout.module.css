@@ -10,7 +10,7 @@
   padding: 2rem;
   display: flex;
   gap: 1rem;
-  align-items: end;
+  align-items: flex-end;
   color: color-mix(in lab, var(--bg-body), white 80%);
 }
 
