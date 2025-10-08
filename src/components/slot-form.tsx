@@ -89,70 +89,76 @@ export function SlotForm({ slot, guest }: Props) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input type="hidden" {...register("reservationId")} />
-      <div>
-        <h2 className="text align-center color-inherit">
-          {slot.start && format(slot.start, "yyyy-MM-dd")}
-        </h2>
-        <p className="flex align-center">
-          <Clock />
-          <span>
-            {slot.start && format(slot.start, "HH:mm")}
-            {slot.end && ` - ${format(slot.end, "HH:mm")}`}
-          </span>
-        </p>
-        <div>
-          <label htmlFor="email">
-            <span>E-post</span>
-            <EmailDisclaimer />
-            <input autoFocus type="email" {...register("email")} />
-            {errors.email?.message && (
-              <span className="text sm">{errors.email.message}</span>
+      <article>
+        <header>
+          <input type="hidden" {...register("reservationId")} />
+          <h2 className="text align-center color-inherit">
+            {slot.start && format(slot.start, "yyyy-MM-dd")}
+          </h2>
+          <p className="flex align-center">
+            <Clock />
+            <span>
+              {slot.start && format(slot.start, "HH:mm")}
+              {slot.end && ` - ${format(slot.end, "HH:mm")}`}
+            </span>
+          </p>
+        </header>
+        <main>
+          <div>
+            <label htmlFor="email">
+              <span>E-post</span>
+              <EmailDisclaimer />
+              <input autoFocus type="email" {...register("email")} />
+              {errors.email?.message && (
+                <span className="text sm">{errors.email.message}</span>
+              )}
+            </label>
+            <label htmlFor="name">
+              <span>Namn</span>
+              <input type="text" {...register("name")} />
+            </label>
+          </div>
+          <div className="flex gap-2">
+            <label htmlFor="adults" className="flex-1">
+              <span>Vuxna</span>
+              <input type="number" {...register("adults")} id="adults" />
+              {errors.adults?.message && (
+                <span className="text sm">{errors.adults.message}</span>
+              )}
+            </label>
+            <label htmlFor="children" className="flex-1">
+              <span>Barn</span>
+              <input type="number" {...register("children")} id="children" />
+              {errors.children?.message && (
+                <span className="text sm">{errors.children.message}</span>
+              )}
+            </label>
+          </div>
+          <div>
+            <label htmlFor="notes">
+              <span>Matrestriktioner</span>
+              <textarea
+                rows={3}
+                {...register("notes")}
+                placeholder="eller annat vi behöver veta"
+              />
+            </label>
+          </div>
+        </main>
+        <footer>
+          <div className="flex justify-end">
+            {guest?.attending && (
+              <button type="button" className="reset" onClick={onDelete}>
+                Ta bort
+              </button>
             )}
-          </label>
-          <label htmlFor="name">
-            <span>Namn</span>
-            <input type="text" {...register("name")} />
-          </label>
-        </div>
-        <div className="flex gap-2">
-          <label htmlFor="adults" className="flex-1">
-            <span>Vuxna</span>
-            <input type="number" {...register("adults")} id="adults" />
-            {errors.adults?.message && (
-              <span className="text sm">{errors.adults.message}</span>
-            )}
-          </label>
-          <label htmlFor="children" className="flex-1">
-            <span>Barn</span>
-            <input type="number" {...register("children")} id="children" />
-            {errors.children?.message && (
-              <span className="text sm">{errors.children.message}</span>
-            )}
-          </label>
-        </div>
-        <div>
-          <label htmlFor="notes">
-            <span>Matrestriktioner</span>
-            <textarea
-              rows={3}
-              {...register("notes")}
-              placeholder="eller annat vi behöver veta"
-            />
-          </label>
-        </div>
-        <div className="flex justify-end">
-          {guest?.attending && (
-            <button type="button" className="reset" onClick={onDelete}>
-              Ta bort
+            <button type="button" className="reset" onClick={router.back}>
+              Avbryt
             </button>
-          )}
-          <button type="button" className="reset" onClick={router.back}>
-            Avbryt
-          </button>
-          <button type="submit">Skicka</button>
-        </div>
-      </div>
+            <button type="submit">Skicka</button>
+          </div>
+        </footer>
+      </article>
     </form>
   );
 }

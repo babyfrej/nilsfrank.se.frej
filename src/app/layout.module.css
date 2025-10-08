@@ -1,11 +1,11 @@
-.footer {
+body > .footer {
   position: relative;
   --clr-text: var(--bg-body-tertiary);
   background-color: var(--bg-body-tertiary);
   border-block-start: 1px solid
     color-mix(in lab, var(--bg-body-secondary) 86%, hsl(0, 0%, 100%));
 }
-.footer .main {
+body > .footer .main {
   height: 300px;
   padding: 2rem;
   display: flex;
