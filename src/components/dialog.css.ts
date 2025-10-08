@@ -7,7 +7,6 @@ export const dialog = style({
     [bgVar]: "var(--clr-tertiary)",
     [bgMixVar]: "hsl(0, 0%, 100%)",
   },
-  overflow: "visible",
   overscrollBehavior: "contain",
   color: "currentColor",
   borderRadius: 32,
@@ -20,8 +19,7 @@ export const dialog = style({
 });
 
 globalStyle(`${dialog} > *`, { padding: "1rem" });
-
-export const scolldisable = style({
+globalStyle("body:has(dialog[open])", {
   height: "auto !important",
   overflow: "hidden !important",
 });
